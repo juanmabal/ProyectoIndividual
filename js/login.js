@@ -1,5 +1,5 @@
 function ingreso() {
-    location.replace("https://www.w3schools.com")
+    location.replace("portada.html")
   }
 
 document.addEventListener("DOMContentLoaded", function () {
