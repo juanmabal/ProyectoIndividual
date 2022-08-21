@@ -1,11 +1,12 @@
+//array donde se cargarán los datos recibidos:
 let categoriesArray = [];
 
 //función que recibe un array con los datos, y los muestra en pantalla a través el uso del DOM
 function showCategoriesList(array){
     let htmlContentToAppend = "";
 
-    for(let i = 0; i < array.length; i++){ 
-        let category = array[i];
+    for(let i = 0; i < array.products.length; i++){ 
+        let category = array.products[i];
         htmlContentToAppend += `
         <div class="list-group-item list-group-item-action">
             <div class="row">
@@ -18,7 +19,7 @@ function showCategoriesList(array){
                         <h4>`+ category.name +`</h4> 
                         <p> `+ category.description +`</p> 
                         </div>
-                        <small class="text-muted">` + category.productCount + ` artículos</small> 
+                        <small class="text-muted">` + category.soldCount + ` vendidos</small> 
                     </div>
 
                 </div>
