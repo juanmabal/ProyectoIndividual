@@ -16,10 +16,10 @@ let hideSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "none";
 }
 
-function getJSONData(url){
+let getJSONData = function(url){
   let result = {};
-  showSpinner(); 
-  return fetch(url) 
+  showSpinner();
+  return fetch(url)
   .then(response => {
     if (response.ok) {
       return response.json();
@@ -30,13 +30,13 @@ function getJSONData(url){
   .then(function(response) {
         result.status = 'ok';
         result.data = response;
-        hideSpinner(); 
+        hideSpinner();
         return result;
   })
   .catch(function(error) {
       result.status = 'error';
       result.data = error;
-      hideSpinner(); 
+      hideSpinner();
       return result;
   });
 }
