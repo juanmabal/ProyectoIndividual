@@ -8,6 +8,13 @@ const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
 const CAT_CIENTOUNO = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 
+let showUserName = function(){  /* Función para mostrar nombre de usuario en nav */
+  let user = localStorage.getItem('usuario');    
+  document.getElementById("nomusuario").innerHTML = user;
+}
+
+showUserName();
+
 let showSpinner = function(){
   document.getElementById("spinner-wrapper").style.display = "block";
 }
