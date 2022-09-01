@@ -84,11 +84,14 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
     showCategoriesList();
 }
 
+console.log(CatID);
+console.log(`${PRODUCTS_URL}${CatID}${EXT_TYPE}`)
+
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(CAT_CIENTOUNO).then(function(resultObj){
+    getJSONData(`${PRODUCTS_URL}${CatID}${EXT_TYPE}`).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data
             showCategoriesList()
