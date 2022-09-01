@@ -46,8 +46,8 @@ function showCategoriesList(){
     for(let i = 0; i < currentCategoriesArray.products.length; i++){
         let category = currentCategoriesArray.products[i];
 
-        if (((minCount == undefined) || (minCount != undefined && parseInt(category.productCount) >= minCount)) &&
-            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.productCount) <= maxCount))){
+        if (((minCount == undefined) || (minCount != undefined && parseInt(category.cost) >= minCount)) &&
+            ((maxCount == undefined) || (maxCount != undefined && parseInt(category.cost) <= maxCount))){
 
             htmlContentToAppend += `
             <div onclick="setCatID(${category.id})" class="list-group-item list-group-item-action cursor-active">
@@ -140,4 +140,5 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         showCategoriesList();
     });
+
 });
