@@ -6,6 +6,46 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
+function compare_cost_asc( a, b )  {
+    if ( a.cost > b.cost){
+      return 1;
+    }
+    if ( a.cost < b.cost){
+      return -1;
+    }
+    return 0;
+  }
+
+  function compare_cost_desc( a, b )  {
+    if ( a.cost > b.cost){
+      return -1;
+    }
+    if ( a.cost < b.cost){
+      return 1;
+    }
+    return 0;
+  }
+
+  function relevance_desc( a, b )  {
+    if ( a.soldCount > b.soldCount){
+      return -1;
+    }
+    if ( a.soldCount < b.soldCount){
+      return 1;
+    }
+    return 0;
+  }
+
+/* function compare_name( a, b )  {
+    if ( a.name.toLowerCase() < b.name.toLowerCase()){
+      return -1;
+    }
+    if ( a.name.toLowerCase() > b.name.toLowerCase()){
+      return 1;
+    }
+    return 0;
+  } */
+
 function sortCategories(criteria, array){
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME)
@@ -23,8 +63,8 @@ function sortCategories(criteria, array){
         });
     }else if (criteria === ORDER_BY_PROD_COUNT){
         result = array.sort(function(a, b) {
-            let aCount = parseInt(a.productCount);
-            let bCount = parseInt(b.productCount);
+            let aCount = parseInt(a.soldCount);
+            let bCount = parseInt(b.soldCount);
 
             if ( aCount > bCount ){ return -1; }
             if ( aCount < bCount ){ return 1; }
@@ -41,6 +81,8 @@ function setCatID(id) {
 }
 
 function showCategoriesList(){
+
+    document.getElementById("cat-name").innerHTML = 'Verás aquí todos los productos de la categoría ' + currentCategoriesArray.catName;
 
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.products.length; i++){
@@ -69,6 +111,7 @@ function showCategoriesList(){
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
     }
+    
 }
 
 function sortAndShowCategories(sortCriteria, categoriesArray){
@@ -84,9 +127,6 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
     showCategoriesList();
 }
 
-console.log(CatID);
-console.log(`${PRODUCTS_URL}${CatID}${EXT_TYPE}`)
-
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
@@ -100,15 +140,28 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_ASC_BY_NAME);
+        /* sortAndShowCategories(ORDER_ASC_BY_NAME); */
+
+        // currentCategoriesArray.products.sort(compare_name);
+
+        currentCategoriesArray.products.sort(compare_cost_asc);
+        showCategoriesList();
+
+
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_DESC_BY_NAME);
+        /* sortAndShowCategories(ORDER_DESC_BY_NAME);     */
+
+        currentCategoriesArray.products.sort(compare_cost_desc);
+        showCategoriesList();
     });
 
     document.getElementById("sortByCount").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_BY_PROD_COUNT);
+        /* sortAndShowCategories(ORDER_BY_PROD_COUNT); */
+
+        currentCategoriesArray.products.sort(relevance_desc);
+        showCategoriesList();
     });
 
     document.getElementById("clearRangeFilter").addEventListener("click", function(){

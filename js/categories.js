@@ -6,6 +6,16 @@ let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
 
+function compare_name( a, b )  {
+    if ( a.name.toLowerCase() < b.name.toLowerCase()){
+      return -1;
+    }
+    if ( a.name.toLowerCase() > b.name.toLowerCase()){
+      return 1;
+    }
+    return 0;
+  }
+
 function sortCategories(criteria, array){
     let result = [];
     if (criteria === ORDER_ASC_BY_NAME)
@@ -97,7 +107,12 @@ document.addEventListener("DOMContentLoaded", function(e){
     });
 
     document.getElementById("sortAsc").addEventListener("click", function(){
-        sortAndShowCategories(ORDER_ASC_BY_NAME);
+         /* sortAndShowCategories(ORDER_ASC_BY_NAME);  */
+        
+         currentCategoriesArray.sort(compare_name);
+        console.log(currentCategoriesArray) 
+        showCategoriesList();
+        /* currentCategoriesArray = resultObj.data; */
     });
 
     document.getElementById("sortDesc").addEventListener("click", function(){
