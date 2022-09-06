@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("Debes ingresar una contraseña para continuar");
         } else {
             localStorage.setItem('usuario', document.getElementById("email").value);
-            let user = localStorage.getItem('usuario');
             ingreso();
         }
 

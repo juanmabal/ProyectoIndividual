@@ -10,6 +10,7 @@ const EXT_TYPE = ".json";
 const CAT_CIENTOUNO = "https://japceibal.github.io/emercado-api/cats_products/101.json";
 
 let CatID = localStorage.getItem('catID'); // Obtengo valor de CatID almacenado en localStorage para luego pasarlo y concatenarlo en getJSONData
+let prodID = localStorage.getItem('prodID');
 
 let showUserName = function(){  /* Muestra nombre de usuario en nav */
   let user = localStorage.getItem('usuario');    

@@ -76,13 +76,11 @@ function sortCategories(criteria, array){
 }
 
 function setCatID(id) {
-    localStorage.setItem("catID", id);
-    window.location = "products.html"
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
 }
 
 function showCategoriesList(){
-
-    document.getElementById("cat-name").innerHTML = 'Verás aquí todos los productos de la categoría ' + currentCategoriesArray.catName;
 
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.products.length; i++){
@@ -134,32 +132,25 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(`${PRODUCTS_URL}${CatID}${EXT_TYPE}`).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data
+            document.getElementById("cat-name").innerHTML = 'Verás aquí todos los productos de la categoría ' + currentCategoriesArray.catName;
             showCategoriesList()
             //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
         }
     });
 
-    document.getElementById("sortAsc").addEventListener("click", function(){
-        /* sortAndShowCategories(ORDER_ASC_BY_NAME); */
-
-        // currentCategoriesArray.products.sort(compare_name);
-
+    document.getElementById("sortAsc").addEventListener("click", function(){ //Botón para filtrar por precio (ascendente)
         currentCategoriesArray.products.sort(compare_cost_asc);
         showCategoriesList();
 
 
     });
 
-    document.getElementById("sortDesc").addEventListener("click", function(){
-        /* sortAndShowCategories(ORDER_DESC_BY_NAME);     */
-
+    document.getElementById("sortDesc").addEventListener("click", function(){ //Botón para filtrar por precio (descendente)
         currentCategoriesArray.products.sort(compare_cost_desc);
         showCategoriesList();
     });
 
-    document.getElementById("sortByCount").addEventListener("click", function(){
-        /* sortAndShowCategories(ORDER_BY_PROD_COUNT); */
-
+    document.getElementById("sortByCount").addEventListener("click", function(){ //Botón para filtrar por relevancia (descendente)
         currentCategoriesArray.products.sort(relevance_desc);
         showCategoriesList();
     });
