@@ -188,3 +188,31 @@ a.custom-card:hover {
 .checked {
   color: orange;
 }
+
+/* Aquí comienza lo agregado para el Proyecto Individual */
+
+#product-name {
+  margin-top: 25px;
+  margin-left: 10px;
+  margin-bottom: 25px;
+}
+
+.attributes {
+  font-weight: 700;
+  margin-bottom: 0;
+}
+
+.images {
+
+  width: 220px;
+  height: 140px;
+  margin-right: 20px;
+  margin-left: 20px;
+  padding: 5px;
+  border: 1px solid rgb(224, 219, 219);
+}
+
+#product-commentaries {
+  margin-top: 50px;
+  font-size: 20px;
+}
