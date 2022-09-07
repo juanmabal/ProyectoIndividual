@@ -28,10 +28,26 @@ function showCategoriesList(){
 
 function showCommentsList() {
 
+
     document.getElementById("container").innerHTML += 
-    `<h4 id="product-commentaries">Comentarios</h4>
+    `<h4 id="commentaries-title">Comentarios</h4>
+    <div class="comment_container">
     <p>${currentProductCommentsArray[0].user + ' - ' + currentProductCommentsArray[0].dateTime}
-    <p>${currentProductCommentsArray[0].description}</p>`
+    <p>${currentProductCommentsArray[0].description}</p>
+    </div>
+    <div class="comment_container">
+    <p>${currentProductCommentsArray[1].user + ' - ' + currentProductCommentsArray[1].dateTime}
+    <p>${currentProductCommentsArray[1].description}</p>
+    </div>
+    <div class="comment_container">
+    <p>${currentProductCommentsArray[2].user + ' - ' + currentProductCommentsArray[2].dateTime}
+    <p>${currentProductCommentsArray[2].description}</p>
+    </div>
+    <div class="comment_container">
+    <p>${currentProductCommentsArray[3].user + ' - ' + currentProductCommentsArray[3].dateTime}
+    <p>${currentProductCommentsArray[3].description}</p>
+    </div>`
+    
 
 }
 

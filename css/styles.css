@@ -212,7 +212,21 @@ a.custom-card:hover {
   border: 1px solid rgb(224, 219, 219);
 }
 
-#product-commentaries {
+#commentaries-title {
   margin-top: 50px;
   font-size: 20px;
+}
+
+.comment_container {
+  border: 1px solid rgb(224, 219, 219);
+}
+
+.comment_container p{
+  margin-left: 10px;
+}
+
+.comment_container p:first-child{
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 0;
 }
