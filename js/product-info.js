@@ -28,30 +28,42 @@ function showCategoriesList(){
 
 function showCommentsList() {
 
+    let stars = `${currentProductCommentsArray[0].score}`;
+    console.log(stars);
 
     document.getElementById("container").innerHTML += 
     `<h4 class="commentaries-title ">Comentarios</h4>
     <div class="comment_container">
-    <p>${currentProductCommentsArray[0].user}
-    <p>${currentProductCommentsArray[0].dateTime}
+    <p>${currentProductCommentsArray[0].user}</p>
+    <p>${currentProductCommentsArray[0].dateTime}</p>
     <p>${currentProductCommentsArray[0].description}</p>
     </div>
     <div class="comment_container">
-    <p>${currentProductCommentsArray[1].user}
-    <p>${currentProductCommentsArray[1].dateTime}
+    <p>${currentProductCommentsArray[1].user}</p>
+    <p>${currentProductCommentsArray[1].dateTime}</p>
     <p>${currentProductCommentsArray[1].description}</p>
     </div>
     <div class="comment_container">
-    <p>${currentProductCommentsArray[2].user}
-    <p>${currentProductCommentsArray[2].dateTime}
+    <p>${currentProductCommentsArray[2].user}</p>
+    <p>${currentProductCommentsArray[2].dateTime}</p>
     <p>${currentProductCommentsArray[2].description}</p>
     </div>
     <div class="comment_container">
-    <p>${currentProductCommentsArray[3].user}
-    <p>${currentProductCommentsArray[3].dateTime}
+    <p>${currentProductCommentsArray[3].user}</p>
+    <p>${currentProductCommentsArray[3].dateTime}</p>
     <p>${currentProductCommentsArray[3].description}</p>
     </div>`
+
+    let parrafo = document.getElementsByTagName("p")[11];
+    console.log(parrafo);
+
+    const spanhijo = document.createElement("span")
+    spanhijo.className += "fa fa-star checked";
+    document.getElementsByTagName("p")[11].insertAdjacentElement("beforebegin", spanhijo);
     
+    const spanhijoo = document.createElement("span")
+    spanhijoo.className += "fa fa-star checked";
+    document.getElementsByTagName("p")[11].insertAdjacentElement("beforebegin", spanhijoo);
 
 }
 
@@ -59,7 +71,6 @@ document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(`${PRODUCT_INFO_URL}${prodID}${EXT_TYPE}`).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentProductArray = resultObj.data
-            console.log(currentProductArray.images.length);
             showCategoriesList();
 
             getJSONData(`${PRODUCT_INFO_COMMENTS_URL}${prodID}${EXT_TYPE}`).then(function(resultObj){
@@ -92,7 +103,9 @@ document.addEventListener("DOMContentLoaded", function(e){
         <p>${user}</p>
         <p>${fecha}</p>
         <p>${comentario}</p>
-        </div>`
+        </div>`;
+
+
     })
 
 

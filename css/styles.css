@@ -191,7 +191,7 @@ a.custom-card:hover {
 
 /* Aquí comienza lo agregado para el Proyecto Individual */
 
-#product-name {
+#product-name { /*Nombre del producto*/
   margin-top: 25px;
   margin-left: 10px;
   margin-bottom: 25px;
@@ -201,12 +201,12 @@ a.custom-card:hover {
   margin-left: 15px;
 }
 
-.attributes {
+.attributes { /*Precio, descripción, etc*/
   font-weight: 700;
   margin-bottom: 0;
 }
 
-.images {
+.images { /*Imágenes*/
 
   width: 220px;
   height: 140px;
@@ -218,7 +218,7 @@ a.custom-card:hover {
   border: 1px solid rgb(224, 219, 219);
 }
 
-.commentaries-title {
+.commentaries-title { /*Comentarios y Comentar*/
   font-size: 20px;
   margin-top: 15px;
 }
@@ -231,14 +231,14 @@ a.custom-card:hover {
   margin-left: 10px;
 }
 
-.comment_container p:first-child{
+.comment_container p:first-child{ /*Nombre del usuario*/
   display: inline-block;
   margin-top: 10px;
   margin-bottom: 0;
   font-weight: 700;
 }
 
-.comment_container p:nth-child(2){
+.comment_container p:nth-child(2){ /*Fecha*/
   display: inline-block;
   margin-bottom: 5px;
 }
@@ -247,4 +247,8 @@ textarea {
   display: block;
   height: 150px;
   width: 500px;
+}
+
+select {
+  display: block;
 }
