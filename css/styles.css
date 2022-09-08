@@ -197,6 +197,10 @@ a.custom-card:hover {
   margin-bottom: 25px;
 }
 
+#container {
+  margin-left: 15px;
+}
+
 .attributes {
   font-weight: 700;
   margin-bottom: 0;
@@ -206,15 +210,17 @@ a.custom-card:hover {
 
   width: 220px;
   height: 140px;
+  margin-top: 10px;
   margin-right: 20px;
   margin-left: 20px;
+  margin-bottom: 25px;
   padding: 5px;
   border: 1px solid rgb(224, 219, 219);
 }
 
-#commentaries-title {
-  margin-top: 50px;
+.commentaries-title {
   font-size: 20px;
+  margin-top: 15px;
 }
 
 .comment_container {
@@ -226,7 +232,19 @@ a.custom-card:hover {
 }
 
 .comment_container p:first-child{
+  display: inline-block;
   margin-top: 10px;
-  margin-left: 10px;
   margin-bottom: 0;
+  font-weight: 700;
+}
+
+.comment_container p:nth-child(2){
+  display: inline-block;
+  margin-bottom: 5px;
+}
+
+textarea {
+  display: block;
+  height: 150px;
+  width: 500px;
 }
