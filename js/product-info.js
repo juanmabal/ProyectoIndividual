@@ -1,10 +1,4 @@
-function showCategoriesList() {
-
-    for (let i; i < currentProductArray.images.length; i++) {
-        let image = currentProductArray.images[i];
-        console.log(image[1]);
-        document.getElementById("container").innerHTML = `<img src="${image}" class="img-thumbnail">`;
-    }
+function showInfoList() { //Información principal: Precio - Descripción - Categoría - Vendidos
 
     document.getElementById("container").innerHTML =
         `<h3 id="product-name">${currentProductArray.name}</h3>
@@ -18,113 +12,62 @@ function showCategoriesList() {
       <p class="attributes">Cantidad de vendidos</p>
       <p>${currentProductArray.soldCount}</p>
       <p class="attributes">Imagenes ilustrativas</p>
-      <img class ="images" src="${currentProductArray.images[0]}">
-      <img class ="images" src="${currentProductArray.images[1]}">
-      <img class ="images" src="${currentProductArray.images[2]}">
-      <img class ="images" src="${currentProductArray.images[3]}">
       `
 
-}
-
-function showCommentsList() {
-
-    document.getElementById("container").innerHTML +=
-        `<h4 class="commentaries-title ">Comentarios</h4>
-    <div class="comment_container">
-    <p>${currentProductCommentsArray[0].user}</p>
-    <p>${currentProductCommentsArray[0].dateTime} - </p>
-    <p>${currentProductCommentsArray[0].description}</p>
-    </div>`;
-
-    let nochecked_stars = parseInt(`${currentProductCommentsArray[3].score}`); //Estrellas negativas
-    let original_nocheckedstars = nochecked_stars; //Estrellas negativas originales
-
-    let checkedstars = 5 - nochecked_stars; //Estrellas positivas
-
-    while (nochecked_stars < 5) {
-        nochecked_stars += 1;
-        const spanhijo = document.createElement("span")
-        spanhijo.className += "fa fa-star";
-        document.getElementsByTagName("p")[10].insertAdjacentElement("beforeend", spanhijo);
+      for (let i = 0; i < currentProductArray.images.length; i++) { //Imágenes
+        let image = currentProductArray.images[i];
+        document.getElementById("container").innerHTML += `<img src="${image}" class="images">`;
     }
 
-    console.log(checkedstars)
-    console.log(original_nocheckedstars)
+}
 
-    if (currentProductCommentsArray[3].score == 5) {
-        while (checkedstars < original_nocheckedstars) {
-            console.log("aa")
-            const spanhija = document.createElement("span")
-            spanhija.className += "fa fa-star checked";
-            document.getElementsByTagName("p")[10].insertAdjacentElement("beforeend", spanhija);
-            checkedstars += 1;
-        } 
-    } else {
+function showCommentsList() { //Lista de comentarios
+
+    let nump = 10; //Número de párrafo que siempre corresponderá a la fecha y que en cuyo final se agregarán estrellas
+    let stars = undefined; //Estrellas "encendidas"
+    let nostars = undefined //Estrellas "apagadas"
+
+    for (let i = 0; i < currentProductCommentsArray.length; i++) {
+
+        let currentcomment = currentProductCommentsArray[i];
+        document.getElementById("container").innerHTML += `
+        <div class="comment_container">
+        <p>${currentcomment.user}</p>
+        <p>${currentcomment.dateTime} - </p>
+        <p>${currentcomment.description}</p>
+        </div>`;
+
+        stars = parseInt(`${currentcomment.score}`);
+        nostars = 5 - stars;
+
+        while (nostars < 5) {
+            const estrella = document.createElement("span")
+            estrella.className += "fa fa-star checked"; //Estrella encendida
+            document.getElementsByTagName("p")[nump].insertAdjacentElement("beforeend", estrella);
+            nostars += 1;
+        }
+
+        while (stars < 5) {
+            const estrella = document.createElement("span") 
+            estrella.className += "fa fa-star"; //Estrella apagada
+            document.getElementsByTagName("p")[nump].insertAdjacentElement("beforeend", estrella);
+            stars += 1;
+        }
+
+        nump += 3; //Cada tres párrafos se encuentra el correspondiente a la fecha
         
-        while (checkedstars <= original_nocheckedstars) {
-            console.log("bb")
-            const spanhija = document.createElement("span")
-            spanhija.className += "fa fa-star checked";
-            document.getElementsByTagName("p")[10].insertAdjacentElement("beforeend", spanhija);
-            checkedstars += 1;
-        } 
     }
 
-    document.getElementById("container").innerHTML += `<div class="comment_container">
-    <p>${currentProductCommentsArray[1].user}</p>
-    <p>${currentProductCommentsArray[1].dateTime}</p>
-    <p>${currentProductCommentsArray[1].description}</p>
-    </div>
-    <div class="comment_container">
-    <p>${currentProductCommentsArray[2].user}</p>
-    <p>${currentProductCommentsArray[2].dateTime}</p>
-    <p>${currentProductCommentsArray[2].description}</p>
-    </div>
-    <div class="comment_container">
-    <p>${currentProductCommentsArray[3].user}</p>
-    <p>${currentProductCommentsArray[3].dateTime}</p>
-    <p>${currentProductCommentsArray[3].description}</p>
-    </div>`
-
-
-    {/* <p>${currentProductCommentsArray[0].description}</p>
-    </div>
-    <div class="comment_container">
-    <p>${currentProductCommentsArray[1].user}</p>
-    <p>${currentProductCommentsArray[1].dateTime}</p>
-    <p>${currentProductCommentsArray[1].description}</p>
-    </div>
-    <div class="comment_container">
-    <p>${currentProductCommentsArray[2].user}</p>
-    <p>${currentProductCommentsArray[2].dateTime}</p>
-    <p>${currentProductCommentsArray[2].description}</p>
-    </div>
-    <div class="comment_container">
-    <p>${currentProductCommentsArray[3].user}</p>
-    <p>${currentProductCommentsArray[3].dateTime}</p>
-    <p>${currentProductCommentsArray[3].description}</p>
-    </div>` */}
-
-
-
-    let parrafo = document.getElementsByTagName("p")[11];
-    console.log(parrafo);
-
-    const spanhijo = document.createElement("span")
-    spanhijo.className += "fa fa-star checked";
-    /* document.getElementsByTagName("p")[10].insertAdjacentElement("beforeend", spanhijo); */
-
-    const spanhijoo = document.createElement("span")
-    spanhijoo.className += "fa fa-star checked";
-    /* document.getElementsByTagName("p")[11].insertAdjacentElement("beforebegin", spanhijoo); */
 
 }
+
+let nump = 22;
 
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(`${PRODUCT_INFO_URL}${prodID}${EXT_TYPE}`).then(function (resultObj) {
         if (resultObj.status === "ok") {
             currentProductArray = resultObj.data
-            showCategoriesList();
+            showInfoList();
 
             getJSONData(`${PRODUCT_INFO_COMMENTS_URL}${prodID}${EXT_TYPE}`).then(function (resultObj) {
                 if (resultObj.status === "ok") {
@@ -154,11 +97,32 @@ document.addEventListener("DOMContentLoaded", function (e) {
         document.getElementById("container").innerHTML +=
             `<div class="comment_container">
         <p>${user}</p>
-        <p>${fecha}</p>
+        <p>${fecha} - </p>
         <p>${comentario}</p>
         </div>`;
 
+        let stars = undefined; //Estrellas "encendidas"
+        let nostars = undefined //Estrellas "apagadas"
 
+        stars = parseInt(document.getElementById("puntuacion").value);
+        nostars = 5 - stars;
+
+        while (nostars < 5) {
+            const estrella = document.createElement("span")
+            estrella.className += "fa fa-star checked"; //Estrella encendida
+            document.getElementsByTagName("p")[nump].insertAdjacentElement("beforeend", estrella);
+            nostars += 1;
+        }
+
+        while (stars < 5) {
+            const estrella = document.createElement("span") 
+            estrella.className += "fa fa-star"; //Estrella apagada
+            document.getElementsByTagName("p")[nump].insertAdjacentElement("beforeend", estrella);
+            stars += 1;
+        }
+
+        nump += 3; //Cada tres párrafos se encuentra el correspondiente a la fecha
+              
     })
 
 
