@@ -1,3 +1,5 @@
+let nump = 11; //Número de párrafo que siempre corresponderá a la fecha y que en cuyo final se agregarán estrellas
+
 function showInfoList() { //Información principal: Precio - Descripción - Categoría - Vendidos
 
     document.getElementById("container").innerHTML =
@@ -11,7 +13,7 @@ function showInfoList() { //Información principal: Precio - Descripción - Cate
       <p>${currentProductArray.category}</p>
       <p class="attributes">Cantidad de vendidos</p>
       <p>${currentProductArray.soldCount}</p>
-      <p class="attributes">Imagenes ilustrativas</p>
+      <p class="attributes">Imágenes ilustrativas</p>
       `
 
       for (let i = 0; i < currentProductArray.images.length; i++) { //Imágenes
@@ -23,9 +25,7 @@ function showInfoList() { //Información principal: Precio - Descripción - Cate
 
 function showCommentsList() { //Lista de comentarios
 
-    let nump = 10; //Número de párrafo que siempre corresponderá a la fecha y que en cuyo final se agregarán estrellas
-    let stars = undefined; //Estrellas "encendidas"
-    let nostars = undefined //Estrellas "apagadas"
+    document.getElementById("container").innerHTML += `<p class="commentaries-title">Comentarios</p>`
 
     for (let i = 0; i < currentProductCommentsArray.length; i++) {
 
@@ -37,8 +37,8 @@ function showCommentsList() { //Lista de comentarios
         <p>${currentcomment.description}</p>
         </div>`;
 
-        stars = parseInt(`${currentcomment.score}`);
-        nostars = 5 - stars;
+        let stars = parseInt(`${currentcomment.score}`); //Estrellas "encendidas"
+        let nostars = 5 - stars; //Estrellas "apagadas"
 
         while (nostars < 5) {
             const estrella = document.createElement("span")
@@ -61,8 +61,6 @@ function showCommentsList() { //Lista de comentarios
 
 }
 
-let nump = 22;
-
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(`${PRODUCT_INFO_URL}${prodID}${EXT_TYPE}`).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -78,50 +76,61 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
         }
     });
+    
+     //Párrafo correspondiente a la fecha del primer comentario agregado
+    document.getElementById("btnEnviar").addEventListener("click", function () { //Enviar comentario
 
-    document.getElementById("btnEnviar").addEventListener("click", function () {
+        if (localStorage.getItem("usuario")) { //Si el usuario inicio sesión...
+            let hoy = new Date();
+            //Fecha
+            let dia = hoy.getDate();
+            let mes = hoy.getMonth();
+            let anio = hoy.getFullYear();
+            
+            //Hora
+            let hora = hoy.getHours();
+            let minutos = hoy.getMinutes();
+            let segundos = hoy.getSeconds();
+    
+            let fecha = `${anio + '-' + mes + '-' + dia + ' ' + hora + ':' + minutos + ':' + segundos}` //Fecha y hora
+            let user = localStorage.getItem('usuario'); //Usuario
+            let comentario = document.getElementById("comentario").value; //Comentario
+    
+            document.getElementById("container").innerHTML +=
+                `<div class="comment_container">
+            <p>${user}</p>
+            <p>${fecha} - </p>
+            <p>${comentario}</p>
+            </div>`;
+    
+            let stars = undefined; //Estrellas "encendidas"
+            let nostars = undefined //Estrellas "apagadas"
+    
+            stars = parseInt(document.getElementById("puntuacion").value); //Puntuación
+            nostars = 5 - stars;
+    
+            while (nostars < 5) {
+                const estrella = document.createElement("span")
+                estrella.className += "fa fa-star checked"; //Estrella encendida
+                document.getElementsByTagName("p")[nump].insertAdjacentElement("beforeend", estrella);
+                nostars += 1;
+            }
+    
+            while (stars < 5) {
+                const estrella = document.createElement("span") 
+                estrella.className += "fa fa-star"; //Estrella apagada
+                document.getElementsByTagName("p")[nump].insertAdjacentElement("beforeend", estrella);
+                stars += 1;
+            }
 
-        //Fecha y Hora
-        let hoy = new Date();
-        let dia = hoy.getDate();
-        let mes = hoy.getMonth();
-        let anio = hoy.getFullYear();
-        let hora = hoy.getHours();
-        let minutos = hoy.getMinutes();
-        let segundos = hoy.getSeconds();
-
-        let fecha = `${anio + '-' + mes + '-' + dia + ' ' + hora + ':' + minutos + ':' + segundos}`
-        let user = localStorage.getItem('usuario');
-        let comentario = document.getElementById("comentario").value;
-
-        document.getElementById("container").innerHTML +=
-            `<div class="comment_container">
-        <p>${user}</p>
-        <p>${fecha} - </p>
-        <p>${comentario}</p>
-        </div>`;
-
-        let stars = undefined; //Estrellas "encendidas"
-        let nostars = undefined //Estrellas "apagadas"
-
-        stars = parseInt(document.getElementById("puntuacion").value);
-        nostars = 5 - stars;
-
-        while (nostars < 5) {
-            const estrella = document.createElement("span")
-            estrella.className += "fa fa-star checked"; //Estrella encendida
-            document.getElementsByTagName("p")[nump].insertAdjacentElement("beforeend", estrella);
-            nostars += 1;
+            document.getElementById("btnEnviar").disabled = true; //Inhabilita botón
+        
+        } else { //Si el usuario no inicio sesión..
+            alert("Debe iniciar sesión para comentar");
+            window.location = "index.html";
         }
 
-        while (stars < 5) {
-            const estrella = document.createElement("span") 
-            estrella.className += "fa fa-star"; //Estrella apagada
-            document.getElementsByTagName("p")[nump].insertAdjacentElement("beforeend", estrella);
-            stars += 1;
-        }
-
-        nump += 3; //Cada tres párrafos se encuentra el correspondiente a la fecha
+       
               
     })
 
