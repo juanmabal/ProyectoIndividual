@@ -191,6 +191,44 @@ a.custom-card:hover {
 
 /* Aquí comienza lo agregado para el Proyecto Individual */
 
+/* Index*/
+#index {
+  background-color: rgb(248, 249, 250);
+}
+
+.login img{
+  display: block;
+  margin: 0px auto;
+  height: 175px;
+  width: 400px;
+}
+
+.login h1{
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  font-size: 28px;
+}
+
+.login input{
+  display: block;
+  margin: 0px auto;
+  width: 250px;
+}
+
+.login p{
+  display: block;
+  text-align: center;
+  margin-bottom: 5px;
+  margin-top: 10px;
+}
+
+.login button{
+  display: block;
+  margin: 0px auto;
+}
+
+/*products-info*/
 #product-name { /*Nombre del producto*/
   margin-top: 25px;
   margin-left: 10px;
