@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     });
     
+                                             //DESAFÍO
     document.getElementById("btnEnviar").addEventListener("click", function () { //Botón enviar
 
         if (localStorage.getItem("usuario")) { //Si el usuario ha iniciado sesión...
