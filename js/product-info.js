@@ -1,6 +1,7 @@
 let nump = 11; //Número de párrafo que siempre corresponderá a la fecha y que en cuyo final se agregarán estrellas
 let stars = undefined; //Estrellas "encendidas"
 let nostars = undefined; //Estrellas "apagadas"
+let parrafo = undefined;
 
 function addStars() {
     while (nostars < 5) {
@@ -43,7 +44,7 @@ function showInfoList() { //Información principal: Precio - Descripción - Cate
 
 function showCommentsList() { //Lista de comentarios
 
-    document.getElementById("container").innerHTML += `<p class="commentaries-title">Comentarios</p>`
+    document.getElementById("container").innerHTML += `<p class="commentaries-title">Comentarios</p>`;
     
     for (let i = 0; i < currentProductCommentsArray.length; i++) {
         let currentcomment = currentProductCommentsArray[i];
@@ -62,6 +63,19 @@ function showCommentsList() { //Lista de comentarios
     }
 }
 
+function showRelatedProducts(){
+
+    for (let i = 0; i < currentProductArray.relatedProducts.length; i++) {
+        let relatedProduct = currentProductArray.relatedProducts[i];
+
+        document.getElementById("related_products").innerHTML +=
+         `<div class="related_products">
+         <img src="${relatedProduct.image}" class="images">
+         <p>${relatedProduct.name}</p>
+         </div>`;
+    }
+}
+
 document.addEventListener("DOMContentLoaded", function (e) {
     getJSONData(`${PRODUCT_INFO_URL}${prodID}${EXT_TYPE}`).then(function (resultObj) {
         if (resultObj.status === "ok") {
@@ -72,13 +86,16 @@ document.addEventListener("DOMContentLoaded", function (e) {
                 if (resultObj.status === "ok") {
                     currentProductCommentsArray = resultObj.data
                     showCommentsList();
+                    showRelatedProducts();
+                    let parrafos = document.getElementsByTagName("p")[25];
+                    console.log(parrafos);
                 }
             });
 
         }
     });
     
-                                             //DESAFÍO
+                                                 //DESAFÍO
     document.getElementById("btnEnviar").addEventListener("click", function () { //Botón enviar
 
         if (localStorage.getItem("usuario")) { //Si el usuario ha iniciado sesión...
@@ -107,6 +124,9 @@ document.addEventListener("DOMContentLoaded", function (e) {
              stars = parseInt(document.getElementById("puntuacion").value); //Puntuación y Estrellas "Encendidas"
              nostars = 5 - stars; //Estrellas "apagadas"
              addStars();
+             console.log(nump);
+             parrafo = document.getElementsByTagName("p")[nump];
+             console.log(parrafo);
 
             document.getElementById("comentario").value = ""; //Vacía comentario
             document.getElementById("comentario").disabled = true; //Inhabilita comentario

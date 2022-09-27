@@ -290,3 +290,11 @@ textarea {
 select {
   display: block;
 }
+
+.related_products {
+  display: inline-block;
+}
+
+.related_products p{
+  text-align: center;
+}
