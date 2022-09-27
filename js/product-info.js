@@ -1,7 +1,6 @@
 let nump = 11; //Número de párrafo que siempre corresponderá a la fecha y que en cuyo final se agregarán estrellas
 let stars = undefined; //Estrellas "encendidas"
 let nostars = undefined; //Estrellas "apagadas"
-let parrafo = undefined;
 
 function addStars() {
     while (nostars < 5) {
@@ -87,8 +86,6 @@ document.addEventListener("DOMContentLoaded", function (e) {
                     currentProductCommentsArray = resultObj.data
                     showCommentsList();
                     showRelatedProducts();
-                    let parrafos = document.getElementsByTagName("p")[25];
-                    console.log(parrafos);
                 }
             });
 
@@ -99,7 +96,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("btnEnviar").addEventListener("click", function () { //Botón enviar
 
         if (localStorage.getItem("usuario")) { //Si el usuario ha iniciado sesión...
-            let hoy = new Date();
+          
+              let hoy = new Date();
             //Fecha
             let dia = hoy.getDate();
             let mes = hoy.getMonth();
@@ -123,10 +121,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
     
              stars = parseInt(document.getElementById("puntuacion").value); //Puntuación y Estrellas "Encendidas"
              nostars = 5 - stars; //Estrellas "apagadas"
-             addStars();
-             console.log(nump);
-             parrafo = document.getElementsByTagName("p")[nump];
-             console.log(parrafo);
+             addStars(); 
 
             document.getElementById("comentario").value = ""; //Vacía comentario
             document.getElementById("comentario").disabled = true; //Inhabilita comentario
@@ -135,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         
         } else { //Si el usuario no ha iniciado sesión..
             alert("Debe iniciar sesión para comentar");
-            window.location = "index.html";
+            window.location = "index.html"; 
         }
             
     })
