@@ -1,3 +1,5 @@
+localStorage.removeItem('usuario');
+
 function ingreso() {
     location.replace("portada.html")
   }

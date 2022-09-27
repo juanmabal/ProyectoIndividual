@@ -62,13 +62,18 @@ function showCommentsList() { //Lista de comentarios
     }
 }
 
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
+}
+
 function showRelatedProducts(){
 
     for (let i = 0; i < currentProductArray.relatedProducts.length; i++) {
         let relatedProduct = currentProductArray.relatedProducts[i];
 
         document.getElementById("related_products").innerHTML +=
-         `<div class="related_products">
+         `<div onclick="setProdID(${relatedProduct.id})" class="related_products">
          <img src="${relatedProduct.image}" class="images">
          <p>${relatedProduct.name}</p>
          </div>`;
