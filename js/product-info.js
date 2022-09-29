@@ -35,10 +35,43 @@ function showInfoList() { //Información principal: Precio - Descripción - Cate
       <p class="attributes">Imágenes ilustrativas</p>
       `
 
-      for (let i = 0; i < currentProductArray.images.length; i++) { //Imágenes
+      //DESAFÍO - Entrega 4
+      document.getElementById("container").innerHTML += 
+      `<div id="carouselExampleIndicators" class="carousel slide w-50" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="${currentProductArray.images[0]}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="${currentProductArray.images[1]}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="${currentProductArray.images[2]}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="${currentProductArray.images[3]}" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>`
+
+      /* for (let i = 0; i < currentProductArray.images.length; i++) { //Imágenes
         let image = currentProductArray.images[i];
         document.getElementById("container").innerHTML += `<img src="${image}" class="images">`;
-    }
+    } */
 }
 
 function showCommentsList() { //Lista de comentarios
@@ -97,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
         }
     });
     
-                                                 //DESAFÍO
+                                                 //DESAFÍO - Entrega 4
     document.getElementById("btnEnviar").addEventListener("click", function () { //Botón enviar
 
         if (localStorage.getItem("usuario")) { //Si el usuario ha iniciado sesión...
