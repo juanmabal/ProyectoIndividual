@@ -76,8 +76,8 @@ function sortCategories(criteria, array){
     return result;
 }
 
-function setProdID(id) {
-    localStorage.setItem("prodID", id);
+function setProdID(id, name) {
+    localStorage.setItem("prodID", id);    
     window.location = "product-info.html"
 }
 
@@ -135,6 +135,7 @@ document.addEventListener("DOMContentLoaded", function(e){
             currentProductsArray = resultObj.data
             document.getElementById("cat-name").innerHTML = 'Verás aquí todos los productos de la categoría ' + currentProductsArray.catName;
             showProductsList()
+            console.log(currentProductsArray.products[0].name);
             //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
         }
     });
