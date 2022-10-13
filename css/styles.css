@@ -298,3 +298,40 @@ select {
 .related_products p{
   text-align: center;
 }
+
+/* CARRITO */
+#cart-container h2{
+  margin-top: 30px;
+  text-align: center;
+  color: #4c545a;
+}
+
+#cart-container h4{
+  margin-left: 150px;
+  color: #4c545a;
+}
+
+.cart-info div{
+  display: inline-block;
+  width: 15%;
+}
+
+.cart-info img{
+  float: right;
+  width: 25px;
+  height: 15px;
+} 
+
+.cart-info p{
+  text-align: center;
+  border-bottom: 1px solid rgb(0, 0, 0);
+} 
+
+.cart-info div:nth-child(1) p{
+  border-bottom: 1px solid white;
+}
+
+input#cant_product {
+  margin-left: 65px;
+  width: 25%;
+}
