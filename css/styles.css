@@ -312,7 +312,9 @@ select {
  }
 
  .cart-container img{
+  /* display: block; */
   width: 25%;
+  /* margin: 0px auto; */
  }
 
 .table-responsive th{
@@ -320,7 +322,16 @@ select {
 }
 
 input#cant_product {
-  width: 50%;
+  width: 35%;
+  text-align: center;
+}
+
+.cart-container input {
+  margin-bottom: 20px;
+}
+
+.cart-container p {
+  margin-bottom: 0;
 }
 
 

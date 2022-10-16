@@ -1,9 +1,14 @@
-let unitCost = undefined;
-
 function newSubtotal() {
+  let unitCost = `${currentProductArray.articles[0].unitCost}`;
   let cantProduct = document.getElementById("cant_product").value;
   let subtotal = unitCost * cantProduct; 
   document.getElementById("subtotal").innerHTML = `USD ` + subtotal;
+  if (cantProduct < 1) {
+    document.getElementById("cant_product").value = 1;
+    document.getElementById("subtotal").innerHTML = `USD ${currentProductArray.articles[0].unitCost}`;
+  } else {
+    document.getElementById("subtotal").innerHTML = `USD ` + subtotal;
+  }
 }
 
 function showCart() {
@@ -27,16 +32,16 @@ function showCart() {
             <th scope="row"><img src="${currentProductArray.articles[0].image}" alt=""></th>
             <td>${currentProductArray.articles[0].name}</td>
             <td>USD ${unitCost}</td>
-            <td><input oninput="newSubtotal()" id="cant_product" value="1"></td>
+            <td><input type="number" oninput="newSubtotal()" id="cant_product"></td>
             <td id="subtotal">USD ${unitCost}</td>
           </tr>
         </tbody>
       </table>
     </div>
     <h2>Tipo de envío</h2>
-      <div><input type="radio">Premium - 2 a 5 días (15%)</div>
-      <div><input type="radio">Express - 5 a 8 días (7%)</div>
-      <div><input type="radio">Standard - 12 a 15 días (5%)</div>
+      <div><input name="envio" value="p" type="radio">Premium - 2 a 5 días (15%)</div>
+      <div><input name="envio" value="e" type="radio">Express - 5 a 8 días (7%)</div>
+      <div><input name="envio" value="s" type="radio">Standard - 12 a 15 días (5%)</div>
       <h2>Dirección de envío</h2>
       <p>Calle</p>
       <input type="text"></input>
@@ -45,36 +50,6 @@ function showCart() {
       <p>Dirección</p>
       <input type="text"></input>
     `
-
-   /*  `<h2>Carrito de compras</h2>
-    <h4>Artículos a comprar</h4>
-    <div class="cart-info">
-        <div>
-          <p></p>
-          <img src="${currentProductArray.articles[0].image}" alt="">
-        </div>
-        <div>
-          <p>Nombre</p>
-          <p>${currentProductArray.articles[0].name}</p>
-        </div>
-        <div>
-          <p>Costo</p>
-          <p>${unitCost}</p>
-        </div>
-        <div>
-          <p>Cantidad</p>
-            <input oninput="newSubtotal()" id="cant_product" type="number" value="1"></input>
-        </div>
-        <div>
-          <p>Subtotal</p>
-          <p id="subtotal">USD 15200</p>
-        </div>
-        <h4>Tipo de envío</h4>
-        <input type="radio">Premium - 2 a 5 días (15%)
-        <input type="radio">Express - 5 a 8 días (7%)
-        <input type="radio">Standard - 12 a 15 días (5%)
-      </div>
-      ` */
 
 }
 
