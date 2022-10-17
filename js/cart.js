@@ -1,14 +1,13 @@
+
 function newSubtotal() {
-  let unitCost = `${currentProductArray.articles[0].unitCost}`;
-  let cantProduct = document.getElementById("cant_product").value;
-  let subtotal = unitCost * cantProduct; 
-  document.getElementById("subtotal").innerHTML = `USD ` + subtotal;
-  if (cantProduct < 1) {
-    document.getElementById("cant_product").value = 1;
-    document.getElementById("subtotal").innerHTML = `USD ${currentProductArray.articles[0].unitCost}`;
-  } else {
-    document.getElementById("subtotal").innerHTML = `USD ` + subtotal;
-  }
+
+  let unitCost = `${currentArticleArray.articles[0].unitCost}`;
+  let cantArticles = document.getElementById("cant_articles").value;
+  let subtotal = unitCost * cantArticles;
+  let currency = `${currentArticleArray.articles[0].currency}`;
+
+  document.getElementById("subtotal").innerHTML = currency +` `+ subtotal;
+
 }
 
 function showCart() {
@@ -29,11 +28,12 @@ function showCart() {
         </thead>
         <tbody>
           <tr>
-            <th scope="row"><img src="${currentProductArray.articles[0].image}" alt=""></th>
-            <td>${currentProductArray.articles[0].name}</td>
-            <td>USD ${unitCost}</td>
-            <td><input type="number" oninput="newSubtotal()" id="cant_product"></td>
-            <td id="subtotal">USD ${unitCost}</td>
+            <th scope="row"><img src="${currentArticleArray.articles[0].image}" alt=""></th>
+            <td>${currentArticleArray.articles[0].name}</td>
+            <td>${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
+            <td><input type="number" oninput="newSubtotal()" id="cant_articles" min="1"
+             onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
+            <td id="subtotal">${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
           </tr>
         </tbody>
       </table>
@@ -57,8 +57,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
 
 getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
     if (resultObj.status === "ok") {
-        currentProductArray = resultObj.data
-        unitCost = `${currentProductArray.articles[0].unitCost}`;
+        currentArticleArray = resultObj.data
         showCart();
         }
     });
