@@ -230,9 +230,15 @@ a.custom-card:hover {
 
 /*products-info*/
 #product-name { /*Nombre del producto*/
+
+  display: inline-block;
   margin-top: 25px;
   margin-left: 10px;
   margin-bottom: 25px;
+}
+
+#addToCart {
+  margin-left: 20px;
 }
 
 #container {
@@ -312,17 +318,11 @@ select {
  }
 
  .cart-container img{
-  /* display: block; */
-  width: 25%;
-  /* margin: 0px auto; */
+  width: 50px;
  }
 
-.table-responsive th{
-  width: 20%;
-}
-
 input#cant_articles {
-  width: 35%;
+  width: 75px;
   text-align: center;
 }
 
@@ -333,6 +333,7 @@ input#cant_articles {
 .cart-container p {
   margin-bottom: 0;
 }
+
 
 
 

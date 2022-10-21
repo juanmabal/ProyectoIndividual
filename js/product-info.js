@@ -2,6 +2,69 @@ let nump = 11; //Número de párrafo que siempre corresponderá a la fecha y que
 let stars = undefined; //Estrellas "encendidas"
 let nostars = undefined; //Estrellas "apagadas"
 
+/* let carrito = {
+  "Imagen": 2,
+  "Nombre": 2,
+  "Moneda": `USD`,
+  "Costo": 15000,
+  "Cantidad": 1,
+}
+
+console.log(carrito);
+
+let carritoo = [
+  {
+    "Imagen": 2,
+    "Nombre": 2,
+    "Moneda": `USD`,
+    "Costo": 15000,
+    "Cantidad": 1,
+  },
+  {
+    "Imagen": 2,
+    "Nombre": 2,
+    "Moneda": `USD`,
+    "Costo": 15000,
+    "Cantidad": 1,
+  }
+]
+
+console.log(carritoo); */
+
+function addToCart() {
+
+  if (localStorage.getItem("carrito")) {
+    carrito = JSON.parse(localStorage.getItem("carrito"));
+    carrito.push({
+    "Imagen": `${currentProductArray.images[0]}`,
+    "Nombre": `${currentProductArray.name}`,
+    "Moneda": `${currentProductArray.currency}`,
+    "Costo": `${currentProductArray.cost}`,
+  });
+  localStorage.setItem("carrito", JSON.stringify(carrito));
+  /* window.location = "cart.html" */
+
+  } else {
+    let carrito = [{
+    "Imagen": `${currentProductArray.images[0]}`,
+    "Nombre": `${currentProductArray.name}`,
+    "Moneda": `${currentProductArray.currency}`,
+    "Costo": `${currentProductArray.cost}`,
+    }];
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    /* window.location = "cart.html" */
+  }
+
+  for(let i = 0; i < carrito.length; i++) {
+    articulo = carrito[i];
+    console.log(articulo);
+  }
+  /* for (const Nombre in carrito) {
+    console.log(`${Nombre}: ${carrito[Nombre]}`);
+  } */
+
+}
+
 function addStars() {
     while (nostars < 5) {
         const estrella = document.createElement("span")
@@ -23,6 +86,7 @@ function showInfoList() { //Información principal: Precio - Descripción - Cate
 
     document.getElementById("container").innerHTML =
         `<h3 id="product-name">${currentProductArray.name}</h3>
+        <button onclick="addToCart()" type="button" class="btn btn-success my-3" id="addToCart">Agregar al carrito</button>
      <hr>
       <p class="attributes">Precio</p>
       <p>UYU ${currentProductArray.cost}</p>
@@ -68,10 +132,6 @@ function showInfoList() { //Información principal: Precio - Descripción - Cate
       </button>
     </div>`
 
-      /* for (let i = 0; i < currentProductArray.images.length; i++) { //Imágenes
-        let image = currentProductArray.images[i];
-        document.getElementById("container").innerHTML += `<img src="${image}" class="images">`;
-    } */
 }
 
 function showCommentsList() { //Lista de comentarios

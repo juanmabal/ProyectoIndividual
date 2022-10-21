@@ -1,4 +1,3 @@
-
 function newSubtotal() {
 
   let unitCost = `${currentArticleArray.articles[0].unitCost}`;
@@ -16,7 +15,7 @@ function showCart() {
     `<h1>Carrito de compras</h1>
     <h2>Artículos a comprar</h2>
     <div class="table-responsive">
-      <table class="table">
+      <table class="table" id="carrito">
         <thead>
           <tr>
             <th scope="col"></th>
@@ -28,7 +27,7 @@ function showCart() {
         </thead>
         <tbody>
           <tr>
-            <th scope="row"><img src="${currentArticleArray.articles[0].image}" alt=""></th>
+            <td scope="row"><img src="${currentArticleArray.articles[0].image}" alt=""></td>
             <td>${currentArticleArray.articles[0].name}</td>
             <td>${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
             <td><input type="number" oninput="newSubtotal()" id="cant_articles" min="1"
@@ -48,8 +47,17 @@ function showCart() {
       <p>Número</p>
       <input type="text"></input>
       <p>Dirección</p>
-      <input type="text"></input>
-    `
+      <input type="text"></input>`
+
+    document.getElementById("carrito").innerHTML += 
+    `<tr>
+        <td scope="row"><img src="${currentArticleArray.articles[0].image}" alt=""></td>
+        <td>${currentArticleArray.articles[0].name}</td>
+        <td>${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
+        <td><input type="number" oninput="newSubtotal()" id="cant_articles" min="1"
+        onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
+        <td id="subtotal">${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
+    </tr>`
 
 }
 
