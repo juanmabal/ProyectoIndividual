@@ -2,67 +2,35 @@ let nump = 11; //Número de párrafo que siempre corresponderá a la fecha y que
 let stars = undefined; //Estrellas "encendidas"
 let nostars = undefined; //Estrellas "apagadas"
 
-/* let carrito = {
-  "Imagen": 2,
-  "Nombre": 2,
-  "Moneda": `USD`,
-  "Costo": 15000,
-  "Cantidad": 1,
-}
+function addToCart() { //AGREGAR AL CARRITO
 
-console.log(carrito);
-
-let carritoo = [
-  {
-    "Imagen": 2,
-    "Nombre": 2,
-    "Moneda": `USD`,
-    "Costo": 15000,
-    "Cantidad": 1,
-  },
-  {
-    "Imagen": 2,
-    "Nombre": 2,
-    "Moneda": `USD`,
-    "Costo": 15000,
-    "Cantidad": 1,
-  }
-]
-
-console.log(carritoo); */
-
-function addToCart() {
-
-  if (localStorage.getItem("carrito")) {
+  if (localStorage.getItem("carrito")) { //Si el carrito existe..
     carrito = JSON.parse(localStorage.getItem("carrito"));
     carrito.push({
+    "Id": `${currentProductArray.id}`,
     "Imagen": `${currentProductArray.images[0]}`,
     "Nombre": `${currentProductArray.name}`,
     "Moneda": `${currentProductArray.currency}`,
     "Costo": `${currentProductArray.cost}`,
+    "Subtotal": `subtotal`+`${currentProductArray.id}`,
   });
   localStorage.setItem("carrito", JSON.stringify(carrito));
-  /* window.location = "cart.html" */
+   window.location = "cart.html" 
 
-  } else {
+  } else { //Si no existe
     let carrito = [{
+    "Id": `${currentProductArray.id}`,
     "Imagen": `${currentProductArray.images[0]}`,
     "Nombre": `${currentProductArray.name}`,
     "Moneda": `${currentProductArray.currency}`,
     "Costo": `${currentProductArray.cost}`,
+    "Subtotal": `subtotal`+`${currentProductArray.id}`,
     }];
+    let subtotal = carrito[0].Id + `subtotal`;
+
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    /* window.location = "cart.html" */
+    window.location = "cart.html" 
   }
-
-  for(let i = 0; i < carrito.length; i++) {
-    articulo = carrito[i];
-    console.log(articulo);
-  }
-  /* for (const Nombre in carrito) {
-    console.log(`${Nombre}: ${carrito[Nombre]}`);
-  } */
-
 }
 
 function addStars() {

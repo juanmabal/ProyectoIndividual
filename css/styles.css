@@ -334,6 +334,20 @@ input#cant_articles {
   margin-bottom: 0;
 }
 
+.subtotales {
+  border: 1px solid rgb(226, 220, 220);
+  padding: 15px;
+}
+
+.subtotales p:first-child, p:nth-child(2){
+  display: inline-block;
+} 
+
+ .subtotales p:nth-child(2) {
+  float: right;
+  margin-right: 20px;
+}
+
 
 
 
