@@ -22,7 +22,6 @@ function addToCart() {
     <td id="${articulo.Subtotal}">${articulo.Moneda + ` ` + articulo.Costo}</td>
     </tr>`
   }
-
 }
 
 /* function article_Subtotal(costo, id, artSubtotal, moneda) {
@@ -38,20 +37,20 @@ function addToCart() {
 
 function enviopremium() {
   subtotalpremium = ((subtotal * 15) / 100);
-  document.getElementById("subtotal2").innerHTML = subtotalpremium;
-  document.getElementById("subtotal3").innerHTML = subtotal + subtotalpremium;
+  document.getElementById("subtotal2").innerHTML = `USD ` + subtotalpremium;
+  document.getElementById("subtotal3").innerHTML = `USD ` + (subtotal + subtotalpremium);
 }
 
 function envioexpress() {
   subtotalexpress = ((subtotal * 7) / 100);
-  document.getElementById("subtotal2").innerHTML = subtotalexpress;
-  document.getElementById("subtotal3").innerHTML = subtotal + subtotalexpress;
+  document.getElementById("subtotal2").innerHTML = `USD ` + subtotalexpress;
+  document.getElementById("subtotal3").innerHTML = `USD ` + (subtotal + subtotalexpress);
 }
 
 function enviostandard() {
   subtotalstandard = ((subtotal * 5) / 100);
-  document.getElementById("subtotal2").innerHTML = subtotalstandard;
-  document.getElementById("subtotal3").innerHTML = subtotal + subtotalstandard;
+  document.getElementById("subtotal2").innerHTML = `USD ` + subtotalstandard;
+  document.getElementById("subtotal3").innerHTML = `USD ` + (subtotal + subtotalstandard);
 }
 
 function newSubtotal() {
@@ -66,13 +65,39 @@ function newSubtotal() {
 
   if (document.getElementById("premium").checked) {
     enviopremium();
-    /* document.getElementById("subtotal3").innerHTML = subtotal + subtotalpremium; */
   } else if (document.getElementById("express").checked) {
     envioexpress();
-    /* document.getElementById("subtotal3").innerHTML = subtotal + subtotalexpress; */
     } else if (document.getElementById("standard").checked) {
       enviostandard();
     }
+}
+
+function pagoTarjeta() {
+  if (document.getElementById("tarjeta").checked) {
+    document.getElementById("numtarjeta").disabled = false;
+    document.getElementById("codigo").disabled = false;
+    document.getElementById("vencimiento").disabled = false;
+
+    document.getElementById("cuenta").disabled = true;
+  }
+}
+
+function pagoTransferencia() {
+  if (document.getElementById("bancaria").checked) {
+    document.getElementById("cuenta").disabled = false;
+
+    document.getElementById("numtarjeta").disabled = true;
+    document.getElementById("codigo").disabled = true;
+    document.getElementById("vencimiento").disabled = true;
+  }
+}
+
+function seleccionado() {
+  if (document.getElementById("tarjeta").checked) {
+    document.getElementById("noseleccionado").innerHTML = `Tarjeta de crédito`;
+  } else if (document.getElementById("bancaria").checked) {
+    document.getElementById("noseleccionado").innerHTML = `Transferencia bancaria`;
+  }
 }
 
 function showCart() {
@@ -114,7 +139,8 @@ function showCart() {
       <input type="text"></input>
       <p>Dirección</p>
       <input type="text"></input>
-      
+
+      <h2>Costos</h2>
       <div class="subtotales">
       <p>Subtotal</p><p id="subtotal1">USD</p><p>Costo unitario del producto por cantidad</p></div>
       <div>
@@ -123,7 +149,16 @@ function showCart() {
       <div>
       <div class="subtotales">
       <p>Total ($)</p><p id="subtotal3">USD</p><p>Subtotal</p></div>
-      <div>`
+      <div>
+      
+      <h2>Forma de pago</h2>
+      <div class="col-sm-12">
+        <p id="noseleccionado">No ha seleccionado</p>
+        <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#modalPago" id="seleccionar">Seleccionar</button>
+          <div id="validationServer04Feedback" class="invalid-feedback">
+            Debes aceptar los terminos de servicio
+          </div>
+      </div>`
 
       
 }
@@ -134,7 +169,7 @@ getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
     if (resultObj.status === "ok") {
         currentArticleArray = resultObj.data
         showCart();
-        addToCart();
+        /* addToCart(); */
         }
     });
 });

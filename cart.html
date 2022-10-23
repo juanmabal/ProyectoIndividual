@@ -47,6 +47,46 @@
   </nav>
   <main>
     <div class="container cart-container" id="cart-container"> <!-- CARRITO -->
+
+      <!-- <div class="col-sm-12">
+        <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal"
+          data-bs-target="#modalPago" id="btn-terms">Seleccionar</button>
+          <div id="validationServer04Feedback" class="invalid-feedback">
+            Debes aceptar los terminos de servicio
+          </div>
+      </div> -->
+
+      <!-- MODAL -->
+      <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Forma de pago</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input oninput="pagoTarjeta()" type="radio" id="tarjeta" name="formapago">Tarjeta de credito
+              <hr>
+              <p>Número de tarjeta</p>
+              <input type="text" id="numtarjeta"></input>
+              <p>Código de seguridad</p>
+              <input type="text" id="codigo"></input>
+              <p>Vencimiento (MM/AA)</p>
+              <input type="text" id="vencimiento"></input>
+              <input oninput="pagoTransferencia()" type="radio" id="bancaria" name="formapago">Transferencia bancaria
+              <hr>
+              <p>Número de cuenta</p>
+              <input type="text" id="cuenta"></input>
+            </div>
+            <div class="modal-footer">
+              <div class="form-check">
+                <button onclick="seleccionado()" type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </main>
   <footer class="text-muted">
