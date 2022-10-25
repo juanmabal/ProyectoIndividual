@@ -45,23 +45,65 @@
       </div>
     </div>
   </nav>
-  <main>
+  <main>    
     <div class="container cart-container" id="cart-container"> <!-- CARRITO -->
 
-      <!-- <div class="col-sm-12">
-        <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal"
-          data-bs-target="#modalPago" id="btn-terms">Seleccionar</button>
+      <form class="row g-3" id="formulariopago">
+
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
+          <label class="form-check-label" for="validationFormCheck2">Toggle este radio</label>
+        </div>
+        <div class="form-check mb-3">
+          <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" required>
+          <label class="form-check-label" for="validationFormCheck3">O toggle este otro radio</label>
+        </div>
+
+        <div class="col-md-4">
+          <label for="validationServer01" class="form-label">Calle</label>
+          <input type="text" class="form-control" id="validationServer01" value="Mark" required>
+          <div class="valid-feedback">
+            ¡Se ve bien!
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label for="validationServer02" class="form-label">Número</label>
+          <input type="text" class="form-control" id="validationServer02" value="Otto" required>
+          <div class="valid-feedback">
+            ¡Se ve bien!
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="validationServer03" class="form-label">Esquina</label>
+          <input type="text" class="form-control" id="validationServer03" aria-describedby="validationServer03Feedback" required>
+          <div id="validationServer03Feedback" class="invalid-feedback">
+            Proporciona un número válido.
+          </div>
+          <button type="button" class="btn btn-primary my-3" id="btnEnviar">Enviar</button>
+        </div>
+        
+
+        <h2>Forma de pago</h2>
+        <div class="col-sm-12">
+          <p id="noseleccionado">No ha seleccionado</p>
+          <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#modalPago"
+            id="seleccionar">Seleccionar</button>
           <div id="validationServer04Feedback" class="invalid-feedback">
             Debes aceptar los terminos de servicio
           </div>
-      </div> -->
-
-      <!-- MODAL -->
+        </div>
+        <div class="d-grid gap-2">
+          <button class="btn btn-primary" type="button" id="finalizar-compra">Finalizar compra</button>
+        </div>
+        
+        <!-- MODAL --> 
       <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title">Forma de pago</h5>
+              <h5 class="modal-title" id="formapago-modal">Forma de pago</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -86,6 +128,41 @@
           </div>
         </div>
       </div>
+
+        <div class="col-12">
+        </div>
+      </form>
+
+      <!-- MODAL -->
+      <!-- <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="formapago-modal">Forma de pago</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input oninput="pagoTarjeta()" type="radio" id="tarjeta" name="formapago">Tarjeta de credito
+              <hr>
+              <p>Número de tarjeta</p>
+              <input type="text" id="numtarjeta"></input>
+              <p>Código de seguridad</p>
+              <input type="text" id="codigo"></input>
+              <p>Vencimiento (MM/AA)</p>
+              <input type="text" id="vencimiento"></input>
+              <input oninput="pagoTransferencia()" type="radio" id="bancaria" name="formapago">Transferencia bancaria
+              <hr>
+              <p>Número de cuenta</p>
+              <input type="text" id="cuenta"></input>
+            </div>
+            <div class="modal-footer">
+              <div class="form-check">
+                <button onclick="seleccionado()" type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
 
     </div>
   </main>

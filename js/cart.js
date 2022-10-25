@@ -140,6 +140,9 @@ function showCart() {
       <p>Dirección</p>
       <input type="text"></input>
 
+      <hr>
+
+
       <h2>Costos</h2>
       <div class="subtotales">
       <p>Subtotal</p><p id="subtotal1">USD</p><p>Costo unitario del producto por cantidad</p></div>
@@ -150,15 +153,20 @@ function showCart() {
       <div class="subtotales">
       <p>Total ($)</p><p id="subtotal3">USD</p><p>Subtotal</p></div>
       <div>
-      
-      <h2>Forma de pago</h2>
+
+      <hr id="separador">
+
+      <!-- <h2>Forma de pago</h2>
       <div class="col-sm-12">
-        <p id="noseleccionado">No ha seleccionado</p>
+         <p id="noseleccionado">No ha seleccionado</p>
         <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#modalPago" id="seleccionar">Seleccionar</button>
           <div id="validationServer04Feedback" class="invalid-feedback">
             Debes aceptar los terminos de servicio
           </div>
-      </div>`
+      </div>
+      <div class="d-grid gap-2">
+  <button class="btn btn-primary" type="button" id="finalizar-compra">Finalizar compra</button>
+</div> -->` 
 
       
 }
@@ -170,6 +178,12 @@ getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
         currentArticleArray = resultObj.data
         showCart();
         /* addToCart(); */
+        document.getElementById("btnEnviar").addEventListener("click", function () { //Botón enviar   
+          console.log("a");
+          document.getElementById("formulariopago").className += " was-validated"
+      });
         }
     });
+
+
 });

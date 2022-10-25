@@ -2,6 +2,8 @@ let nump = 11; //Número de párrafo que siempre corresponderá a la fecha y que
 let stars = undefined; //Estrellas "encendidas"
 let nostars = undefined; //Estrellas "apagadas"
 
+
+
 function addToCart() { //AGREGAR AL CARRITO
 
   if (localStorage.getItem("carrito")) { //Si el carrito existe..

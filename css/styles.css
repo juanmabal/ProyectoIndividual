@@ -345,9 +345,32 @@ input#cant_articles {
 
  .subtotales p:nth-child(2) {
   float: right;
-  margin-right: 20px;
+  margin-right: 
+  20px;
 }
 
+#separador {
+  margin-top: 40px;
+}
 
+#noseleccionado, #seleccionar {
+  display: inline-block;
+}
 
+/* MODAL CARRITO*/
+#vencimiento {
+  display: block;
+}
 
+#tarjeta, #bancaria {
+  margin-top: 20px;
+  margin-bottom: 0px;
+}
+
+#formapago-modal {
+  font-size: 25px;
+}
+
+#finalizar-compra {
+  margin-top: 50px;
+}
