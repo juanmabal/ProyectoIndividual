@@ -51,38 +51,52 @@
       <form class="row g-3" id="formulariopago">
 
         <div class="form-check">
-          <input type="radio" class="form-check-input" id="validationFormCheck2" name="radio-stacked" required>
-          <label class="form-check-label" for="validationFormCheck2">Toggle este radio</label>
+          <input type="radio" class="form-check-input" id="validationPremium" name="radio-stacked" required>
+          <label class="form-check-label" for="validationPremium">Premium</label>
         </div>
-        <div class="form-check mb-3">
-          <input type="radio" class="form-check-input" id="validationFormCheck3" name="radio-stacked" required>
-          <label class="form-check-label" for="validationFormCheck3">O toggle este otro radio</label>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="validationExpress" name="radio-stacked" required>
+          <label class="form-check-label" for="validationExpress">Express</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" class="form-check-input" id="validationStandard" name="radio-stacked" required>
+          <label class="form-check-label" for="validationStandard">Standard</label>
         </div>
 
         <div class="col-md-4">
-          <label for="validationServer01" class="form-label">Calle</label>
-          <input type="text" class="form-control" id="validationServer01" value="Mark" required>
+          <label for="calle" class="form-label">Calle</label>
+          <input type="text" class="form-control" id="calle" required>
           <div class="valid-feedback">
             ¡Se ve bien!
+          </div>
+          <div class="invalid-feedback">
+            Proporciona un número válido.
           </div>
         </div>
 
         <div class="col-md-4">
-          <label for="validationServer02" class="form-label">Número</label>
-          <input type="text" class="form-control" id="validationServer02" value="Otto" required>
+          <label for="numero" class="form-label">Número</label>
+          <input type="text" class="form-control" id="numero" required>
           <div class="valid-feedback">
             ¡Se ve bien!
+          </div>
+          <div class="invalid-feedback">
+            Proporciona un número válido.
           </div>
         </div>
 
         <div class="col-md-6">
-          <label for="validationServer03" class="form-label">Esquina</label>
-          <input type="text" class="form-control" id="validationServer03" aria-describedby="validationServer03Feedback" required>
-          <div id="validationServer03Feedback" class="invalid-feedback">
+          <label for="direccion" class="form-label">Dirección</label>
+          <input type="text" class="form-control" id="direccion" aria-describedby="validationServer03Feedback" required>
+          <div class="valid-feedback">
+            ¡Se ve bien!
+          </div>
+          <div class="invalid-feedback">
             Proporciona un número válido.
           </div>
-          <button type="button" class="btn btn-primary my-3" id="btnEnviar">Enviar</button>
         </div>
+
+        <button type="button" class="btn btn-primary my-3" id="btnEnviar">Enviar</button>
         
 
         <h2>Forma de pago</h2>
@@ -90,7 +104,7 @@
           <p id="noseleccionado">No ha seleccionado</p>
           <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#modalPago"
             id="seleccionar">Seleccionar</button>
-          <div id="validationServer04Feedback" class="invalid-feedback">
+          <div class="invalid-feedback">
             Debes aceptar los terminos de servicio
           </div>
         </div>
@@ -98,7 +112,9 @@
           <button class="btn btn-primary" type="button" id="finalizar-compra">Finalizar compra</button>
         </div>
         
-        <!-- MODAL --> 
+
+
+      <!-- M O D A L --> 
       <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -108,19 +124,59 @@
             </div>
             <div class="modal-body">
               <input oninput="pagoTarjeta()" type="radio" id="tarjeta" name="formapago">Tarjeta de credito
+              
               <hr>
-              <p>Número de tarjeta</p>
-              <input type="text" id="numtarjeta"></input>
-              <p>Código de seguridad</p>
-              <input type="text" id="codigo"></input>
-              <p>Vencimiento (MM/AA)</p>
-              <input type="text" id="vencimiento"></input>
+              
+              <div>
+              <label for="numtarjeta" class="form-label">Número de tarjeta</label>
+          <input type="text" class="form-control" id="numtarjeta" required>
+          <div class="valid-feedback">
+            ¡Se ve bien!
+          </div>
+          <div class="invalid-feedback">
+            Proporciona un número válido.
+          </div>
+        </div>
+        
+          <div>
+          <label for="codigo" class="form-label">Código de seguridad</label>
+          <input type="text" class="form-control" id="codigo" required>
+          <div class="valid-feedback">
+            ¡Se ve bien!
+          </div>
+          <div class="invalid-feedback">
+            Proporciona un número válido.
+          </div>
+          </div>
+
+          <div>
+            <label for="vencimiento" class="form-label">Vencimiento (MM/AA)</label>
+            <input type="text" class="form-control" id="vencimiento" aria-describedby="validationServer03Feedback" required>
+            <div class="valid-feedback">
+              ¡Se ve bien!
+            </div>
+            <div class="invalid-feedback">
+              Proporciona un número válido.
+            </div>
+          </div>
+
               <input oninput="pagoTransferencia()" type="radio" id="bancaria" name="formapago">Transferencia bancaria
               <hr>
-              <p>Número de cuenta</p>
-              <input type="text" id="cuenta"></input>
+
+              <div>
+              <label for="cuenta" class="form-label">Número de cuenta</label>
+              <input type="text" class="form-control" id="cuenta" aria-describedby="validationServer03Feedback" required>
+              <div class="valid-feedback">
+                ¡Se ve bien!
+              </div>
+              <div class="invalid-feedback">
+                Proporciona un número válido.
+              </div>
             </div>
+
+          </div>
             <div class="modal-footer">
+
               <div class="form-check">
                 <button onclick="seleccionado()" type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
               </div>

@@ -74,11 +74,13 @@ function newSubtotal() {
 
 function pagoTarjeta() {
   if (document.getElementById("tarjeta").checked) {
+    console.log("a");
     document.getElementById("numtarjeta").disabled = false;
     document.getElementById("codigo").disabled = false;
     document.getElementById("vencimiento").disabled = false;
 
     document.getElementById("cuenta").disabled = true;
+    document.getElementById("cuenta").value = "";
   }
 }
 
@@ -87,8 +89,11 @@ function pagoTransferencia() {
     document.getElementById("cuenta").disabled = false;
 
     document.getElementById("numtarjeta").disabled = true;
+    document.getElementById("numtarjeta").value = "";
     document.getElementById("codigo").disabled = true;
+    document.getElementById("codigo").value = "";
     document.getElementById("vencimiento").disabled = true;
+    document.getElementById("vencimiento").value = "";
   }
 }
 
@@ -156,7 +161,7 @@ function showCart() {
 
       <hr id="separador">
 
-      <!-- <h2>Forma de pago</h2>
+      <h2>Forma de pago</h2>
       <div class="col-sm-12">
          <p id="noseleccionado">No ha seleccionado</p>
         <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#modalPago" id="seleccionar">Seleccionar</button>
@@ -166,7 +171,7 @@ function showCart() {
       </div>
       <div class="d-grid gap-2">
   <button class="btn btn-primary" type="button" id="finalizar-compra">Finalizar compra</button>
-</div> -->` 
+</div> ` 
 
       
 }
@@ -176,14 +181,13 @@ document.addEventListener("DOMContentLoaded", function (e) {
 getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
     if (resultObj.status === "ok") {
         currentArticleArray = resultObj.data
-        showCart();
+        /* showCart(); */
         /* addToCart(); */
         document.getElementById("btnEnviar").addEventListener("click", function () { //Botón enviar   
-          console.log("a");
           document.getElementById("formulariopago").className += " was-validated"
-      });
-        }
-    });
+        });
+  }
 
+});
 
 });
