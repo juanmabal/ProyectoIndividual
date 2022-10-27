@@ -181,11 +181,26 @@ document.addEventListener("DOMContentLoaded", function (e) {
 getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
     if (resultObj.status === "ok") {
         currentArticleArray = resultObj.data
-        /* showCart(); */
-        /* addToCart(); */
-        document.getElementById("btnEnviar").addEventListener("click", function () { //Botón enviar   
+        /* showCart();
+        addToCart(); */
+
+        var forms = document.querySelectorAll('.needs-validation')
+
+       // Bucle sobre ellos y evitar el envío
+       Array.prototype.slice.call(forms)
+       .forEach(function (form) {
+       form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+          event.preventDefault()
+          event.stopPropagation()
+        }
+        form.classList.add('was-validated')
+      }, false)
+    })
+        
+        /* document.getElementById("btnEnviar").addEventListener("submit", function () { //Botón enviar  
           document.getElementById("formulariopago").className += " was-validated"
-        });
+        }); */
   }
 
 });
