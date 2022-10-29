@@ -74,7 +74,6 @@ function newSubtotal() {
 
 function pagoTarjeta() {
   if (document.getElementById("tarjeta").checked) {
-    console.log("a");
     document.getElementById("numtarjeta").disabled = false;
     document.getElementById("codigo").disabled = false;
     document.getElementById("vencimiento").disabled = false;
@@ -108,7 +107,8 @@ function seleccionado() {
 function showCart() {
     
     document.getElementById("cart-container").innerHTML += 
-    `<h1>Carrito de compras</h1>
+    `<form class="row g-3 needs-validation" id="formulariopago" novalidate>
+    <h1>Carrito de compras</h1>
     <h2>Artículos a comprar</h2>
     <div class="table-responsive">
       <table class="table" id="carrito">
@@ -126,7 +126,7 @@ function showCart() {
             <td scope="row"><img src="${currentArticleArray.articles[0].image}" alt=""></td>
             <td>${currentArticleArray.articles[0].name}</td>
             <td>${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
-            <td><input type="number" oninput="newSubtotal()" id="cant_articles" min="1"
+            <td><input type="number" oninput="newSubtotal()" id="cant_articles" class="form-control" min="1" required 
              onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
             <td id="subtotal">${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
           </tr>
@@ -134,16 +134,52 @@ function showCart() {
       </table>
     </div>
     <h2>Tipo de envío</h2>
-      <div><input oninput="enviopremium()" id="premium" name="envio" value="p" type="radio">Premium - 2 a 5 días (15%)</div>
-      <div><input oninput="envioexpress()" id="express" name="envio" value="e" type="radio">Express - 5 a 8 días (7%)</div>
-      <div><input oninput="enviostandard()" id="standard" name="envio" value="s" type="radio">Standard - 12 a 15 días (5%)</div>
-      <h2>Dirección de envío</h2>
-      <p>Calle</p>
-      <input type="text"></input>
-      <p>Número</p>
-      <input type="text"></input>
-      <p>Dirección</p>
-      <input type="text"></input>
+    <div class="form-check">
+    <input oninput="enviopremium()" id="premium" type="radio" class="form-check-input"  name="radio-stacked" required>
+    <label class="form-check-label" for="premium">Premium - 2 a 5 días (15%)</label>
+  </div>
+  <div class="form-check">
+    <input oninput="envioexpress()" id="express" type="radio" class="form-check-input" name="radio-stacked" required>
+    <label class="form-check-label" for="validationExpress">Express - 5 a 8 días (7%)</label>
+  </div>
+  <div class="form-check">
+    <input oninput="enviostandard()" id="standard"type="radio" class="form-check-input" name="radio-stacked" required>
+    <label class="form-check-label" for="validationStandard">Standard - 12 a 15 días (5%)</label>
+  </div>
+
+  <h2>Dirección de envío</h2>
+  <div class="col-md-4">
+  <label for="calle" class="form-label">Calle</label>
+  <input type="text" class="form-control" id="calle" required>
+  <div class="valid-feedback">
+    ¡Se ve bien!
+  </div>
+  <div class="invalid-feedback">
+    Ingresa una calle
+  </div>
+</div>
+
+<div class="col-md-4">
+  <label for="numero" class="form-label">Número</label>
+  <input type="number" class="form-control" id="numero" required>
+  <div class="valid-feedback">
+    ¡Se ve bien!
+  </div>
+  <div class="invalid-feedback">
+    Ingresa un número
+  </div>
+</div>
+
+<div class="col-md-6">
+  <label for="direccion" class="form-label">Esquina</label>
+  <input type="text" class="form-control" id="direccion" aria-describedby="validationServer03Feedback" required>
+  <div class="valid-feedback">
+    ¡Se ve bien!
+  </div>
+  <div class="invalid-feedback">
+    Ingresa una esquina
+  </div>
+</div>
 
       <hr>
 
@@ -161,6 +197,74 @@ function showCart() {
 
       <hr id="separador">
 
+      <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="formapago-modal">Forma de pago</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <input oninput="pagoTarjeta()" type="radio" id="tarjeta" name="formapago">Tarjeta de credito
+              
+              <hr>
+              
+              <div>
+              <label for="numtarjeta" class="form-label">Número de tarjeta</label>
+          <input type="text" class="form-control" id="numtarjeta" required>
+          <div class="valid-feedback">
+            ¡Se ve bien!
+          </div>
+          <div class="invalid-feedback">
+            Proporciona un número válido.
+          </div>
+        </div>
+        
+          <div>
+          <label for="codigo" class="form-label">Código de seguridad</label>
+          <input type="text" class="form-control" id="codigo" required>
+          <div class="valid-feedback">
+            ¡Se ve bien!
+          </div>
+          <div class="invalid-feedback">
+            Proporciona un número válido.
+          </div>
+          </div>
+
+          <div>
+            <label for="vencimiento" class="form-label">Vencimiento (MM/AA)</label>
+            <input type="text" class="form-control" id="vencimiento" aria-describedby="validationServer03Feedback" required>
+            <div class="valid-feedback">
+              ¡Se ve bien!
+            </div>
+            <div class="invalid-feedback">
+              Proporciona un número válido.
+            </div>
+          </div>
+
+              <input oninput="pagoTransferencia()" type="radio" id="bancaria" name="formapago">Transferencia bancaria
+              <hr>
+
+              <div>
+              <label for="cuenta" class="form-label">Número de cuenta</label>
+              <input type="text" class="form-control" id="cuenta" aria-describedby="validationServer03Feedback" required>
+              <div class="valid-feedback">
+                ¡Se ve bien!
+              </div>
+              <div class="invalid-feedback">
+                Proporciona un número válido.
+              </div>
+            </div>
+          </div>
+            <div class="modal-footer">
+              <div class="form-check">
+                <button onclick="seleccionado()" type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <h2>Forma de pago</h2>
       <div class="col-sm-12">
          <p id="noseleccionado">No ha seleccionado</p>
@@ -170,8 +274,9 @@ function showCart() {
           </div>
       </div>
       <div class="d-grid gap-2">
-  <button class="btn btn-primary" type="button" id="finalizar-compra">Finalizar compra</button>
-</div> ` 
+      <button class="btn btn-primary" type="submit" id="finalizar-compra">Finalizar compra</button>
+</div>
+</form>` 
 
       
 }
@@ -181,8 +286,8 @@ document.addEventListener("DOMContentLoaded", function (e) {
 getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
     if (resultObj.status === "ok") {
         currentArticleArray = resultObj.data
-        /* showCart();
-        addToCart(); */
+        showCart();
+       /*  addToCart(); */
 
         var forms = document.querySelectorAll('.needs-validation')
 
@@ -193,9 +298,18 @@ getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
         if (!form.checkValidity()) {
           event.preventDefault()
           event.stopPropagation()
+          form.classList.add('was-validated')
+        } else {
+          event.preventDefault()
+          event.stopPropagation()
+          console.log("a");
+          alert("a");
+         /*  document.getElementById("cart-container").innerHTML += 
+          `<div class="alert alert-success" role="alert">
+          This is a success alert—check it out!
+        </div>` */
         }
-        form.classList.add('was-validated')
-      }, false)
+      }) 
     })
         
         /* document.getElementById("btnEnviar").addEventListener("submit", function () { //Botón enviar  
