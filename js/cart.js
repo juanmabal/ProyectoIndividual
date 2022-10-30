@@ -6,8 +6,7 @@ let subtotalpremium = undefined;
 let subtotalexpress = undefined;
 let subtotalstandard = undefined;
 
-function addToCart() {
-
+function showFullCart() { //DESAFÍO
   localStorage.getItem("carrito");
   carrito = JSON.parse(localStorage.getItem("carrito"));
   for(let i = 0; i < carrito.length; i++) {
@@ -104,10 +103,43 @@ function seleccionado() {
   }
 }
 
+function feedbackFormCarrito() {
+  let modalForm = document.getElementById("modalForm");
+  let formCarrito = document.getElementById("formCarrito")
+  formCarrito.addEventListener('submit', function (event) {
+    if (!formCarrito.checkValidity() || !modalForm.checkValidity()) {
+      event.preventDefault()
+      event.stopPropagation()
+      formCarrito.classList.add('was-validated')
+      feedbackModal();
+    } else {
+      event.preventDefault()
+      event.stopPropagation()
+      successMessage();
+    }
+  })
+}
+
+function feedbackModal() {
+  let modalForm = document.getElementById("modalForm");
+  if (!modalForm.checkValidity() && formCarrito.classList.contains("was-validated")) {
+   let pagoNoValido = document.getElementById("pagoNoValido");
+   pagoNoValido.style.display = 'block';
+  } else {
+   pagoNoValido.style.display = 'none';
+  }
+ }
+
+function successMessage() {
+  document.getElementById("success").innerHTML += 
+  `<div class="alert alert-success" role="alert"> ¡Has comprado con exito!
+</div>`
+}
+
 function showCart() {
     
     document.getElementById("cart-container").innerHTML += 
-    `<form class="row g-3 needs-validation" id="formulariopago" novalidate>
+    ` <form id="formCarrito" class="row g-3 needs-validation" id="formulariopago" novalidate>
     <h1>Carrito de compras</h1>
     <h2>Artículos a comprar</h2>
     <div class="table-responsive">
@@ -126,126 +158,155 @@ function showCart() {
             <td scope="row"><img src="${currentArticleArray.articles[0].image}" alt=""></td>
             <td>${currentArticleArray.articles[0].name}</td>
             <td>${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
-            <td><input type="number" oninput="newSubtotal()" id="cant_articles" class="form-control" min="1" required 
-             onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
-            <td id="subtotal">${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}</td>
+            <td><input type="number" oninput="newSubtotal()" id="cant_articles" class="form-control" min="1" required
+                onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
+            <td id="subtotal">${currentArticleArray.articles[0].currency +` `+ currentArticleArray.articles[0].unitCost}
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
+    
     <h2>Tipo de envío</h2>
+    <div>
     <div class="form-check">
-    <input oninput="enviopremium()" id="premium" type="radio" class="form-check-input"  name="radio-stacked" required>
-    <label class="form-check-label" for="premium">Premium - 2 a 5 días (15%)</label>
-  </div>
-  <div class="form-check">
-    <input oninput="envioexpress()" id="express" type="radio" class="form-check-input" name="radio-stacked" required>
-    <label class="form-check-label" for="validationExpress">Express - 5 a 8 días (7%)</label>
-  </div>
-  <div class="form-check">
-    <input oninput="enviostandard()" id="standard"type="radio" class="form-check-input" name="radio-stacked" required>
-    <label class="form-check-label" for="validationStandard">Standard - 12 a 15 días (5%)</label>
-  </div>
-
-  <h2>Dirección de envío</h2>
-  <div class="col-md-4">
-  <label for="calle" class="form-label">Calle</label>
-  <input type="text" class="form-control" id="calle" required>
-  <div class="valid-feedback">
-    ¡Se ve bien!
-  </div>
-  <div class="invalid-feedback">
-    Ingresa una calle
-  </div>
-</div>
-
-<div class="col-md-4">
-  <label for="numero" class="form-label">Número</label>
-  <input type="number" class="form-control" id="numero" required>
-  <div class="valid-feedback">
-    ¡Se ve bien!
-  </div>
-  <div class="invalid-feedback">
-    Ingresa un número
-  </div>
-</div>
-
-<div class="col-md-6">
-  <label for="direccion" class="form-label">Esquina</label>
-  <input type="text" class="form-control" id="direccion" aria-describedby="validationServer03Feedback" required>
-  <div class="valid-feedback">
-    ¡Se ve bien!
-  </div>
-  <div class="invalid-feedback">
-    Ingresa una esquina
-  </div>
-</div>
-
-      <hr>
-
-
-      <h2>Costos</h2>
+      <input oninput="enviopremium()" id="premium" type="radio" class="form-check-input" name="tipoEnvio" required>
+      <label class="form-check-label" for="premium">Premium - 2 a 5 días (15%)</label>
+    </div>
+    <div class="form-check">
+      <input oninput="envioexpress()" id="express" type="radio" class="form-check-input" name="tipoEnvio" required>
+      <label class="form-check-label" for="validationExpress">Express - 5 a 8 días (7%)</label>
+    </div>
+    <div class="form-check">
+      <input oninput="enviostandard()" id="standard" type="radio" class="form-check-input" name="tipoEnvio" required>
+      <label class="form-check-label" for="validationStandard">Standard - 12 a 15 días (5%)</label>
+      <div class="invalid-feedback">Debe seleccionar una forma de envío</div>
+    </div>  
+    </div>
+  
+    <h2>Dirección de envío</h2>
+    <div class="col-md-4">
+      <label for="calle" class="form-label">Calle</label>
+      <input type="text" class="form-control" id="calle" required>
+      <div class="valid-feedback">
+        ¡Se ve bien!
+      </div>
+      <div class="invalid-feedback">
+        Ingresa una calle
+      </div>
+    </div>
+  
+    <div class="col-md-4">
+      <label for="numero" class="form-label">Número</label>
+      <input type="number" class="form-control" id="numero" required>
+      <div class="valid-feedback">
+        ¡Se ve bien!
+      </div>
+      <div class="invalid-feedback">
+        Ingresa un número
+      </div>
+    </div>
+  
+    <div class="col-md-6">
+      <label for="direccion" class="form-label">Esquina</label>
+      <input type="text" class="form-control" id="direccion" aria-describedby="validationServer03Feedback" required>
+      <div class="valid-feedback">
+        ¡Se ve bien!
+      </div>
+      <div class="invalid-feedback">
+        Ingresa una esquina
+      </div>
+    </div>
+  
+    <hr>
+  
+    <h2>Costos</h2>
+    <div>
+    <div class="subtotales">
+      <p>Subtotal</p>
+      <p id="subtotal1">USD</p>
+      <p>Costo unitario del producto por cantidad</p>
+    </div>
       <div class="subtotales">
-      <p>Subtotal</p><p id="subtotal1">USD</p><p>Costo unitario del producto por cantidad</p></div>
-      <div>
-      <div class="subtotales">
-      <p>Costo de envío</p><p id="subtotal2">USD</p><p>Según el tipo de envío</p></div>
-      <div>
-      <div class="subtotales">
-      <p>Total ($)</p><p id="subtotal3">USD</p><p>Subtotal</p></div>
-      <div>
-
-      <hr id="separador">
-
-      <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="formapago-modal">Forma de pago</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <input oninput="pagoTarjeta()" type="radio" id="tarjeta" name="formapago">Tarjeta de credito
-              
-              <hr>
-              
-              <div>
-              <label for="numtarjeta" class="form-label">Número de tarjeta</label>
-          <input type="text" class="form-control" id="numtarjeta" required>
-          <div class="valid-feedback">
-            ¡Se ve bien!
-          </div>
-          <div class="invalid-feedback">
-            Proporciona un número válido.
-          </div>
+        <p>Costo de envío</p>
+        <p id="subtotal2">USD</p>
+        <p>Según el tipo de envío</p>
+      </div>
+        <div class="subtotales">
+          <p>Total ($)</p>
+          <p id="subtotal3">USD</p>
+          <p>Subtotal</p>
         </div>
-        
-          <div>
-          <label for="codigo" class="form-label">Código de seguridad</label>
-          <input type="text" class="form-control" id="codigo" required>
-          <div class="valid-feedback">
-            ¡Se ve bien!
-          </div>
-          <div class="invalid-feedback">
-            Proporciona un número válido.
-          </div>
-          </div>
+        <div>
+  
+          <hr id="separador">
+  
+          <h2>Forma de pago</h2>
 
           <div>
-            <label for="vencimiento" class="form-label">Vencimiento (MM/AA)</label>
-            <input type="text" class="form-control" id="vencimiento" aria-describedby="validationServer03Feedback" required>
-            <div class="valid-feedback">
-              ¡Se ve bien!
-            </div>
-            <div class="invalid-feedback">
-              Proporciona un número válido.
-            </div>
+            <p id="noseleccionado">No ha seleccionado</p>
+            <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#modalPago"
+              id="seleccionar">Seleccionar</button>
+              <p id="pagoNoValido">Debe seleccionar una forma de pago</p>
+              </div>
+
+          <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit" id="finalizar-compra">Finalizar compra</button>
           </div>
-
-              <input oninput="pagoTransferencia()" type="radio" id="bancaria" name="formapago">Transferencia bancaria
-              <hr>
-
-              <div>
+  </form>
+  
+  <form class="row g-3 needs-validation" id="modalForm" novalidate>
+    <div class="modal fade" id="modalPago" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="formapago-modal">Forma de pago</h5>
+          </div>
+          <div class="modal-body">
+            <input oninput="pagoTarjeta()" type="radio" id="tarjeta" class="form-check-input" name="formapago" required>
+            <label class="form-check-label" for="tarjeta">Tarjeta de credito</label>
+  
+            <hr>
+  
+            <div>
+              <label for="numtarjeta" class="form-label">Número de tarjeta</label>
+              <input type="number" class="form-control" id="numtarjeta" required>
+              <div class="valid-feedback">
+                ¡Se ve bien!
+              </div>
+              <div class="invalid-feedback">
+                Proporciona un número de tarjeta válido.
+              </div>
+            </div>
+  
+            <div>
+              <label for="codigo" class="form-label">Código de seguridad</label>
+              <input type="text" class="form-control" id="codigo" required>
+              <div class="valid-feedback">
+                ¡Se ve bien!
+              </div>
+              <div class="invalid-feedback">
+                Proporciona un código válido
+              </div>
+            </div>
+  
+            <div>
+              <label for="vencimiento" class="form-label">Vencimiento (MM/AA)</label>
+              <input type="text" class="form-control" id="vencimiento" aria-describedby="validationServer03Feedback"
+                required>
+              <div class="valid-feedback">
+                ¡Se ve bien!
+              </div>
+              <div class="invalid-feedback">
+                Proporciona una fecha de vencimiento válida
+            </div>
+  
+            <input oninput="pagoTransferencia()" type="radio" id="bancaria" class="form-check-input" name="formapago"
+              required>
+            <label class="form-check-label" for="bancaria">Transferencia bancaria</label>
+            <hr>
+  
+            <div>
               <label for="cuenta" class="form-label">Número de cuenta</label>
               <input type="text" class="form-control" id="cuenta" aria-describedby="validationServer03Feedback" required>
               <div class="valid-feedback">
@@ -256,27 +317,16 @@ function showCart() {
               </div>
             </div>
           </div>
-            <div class="modal-footer">
-              <div class="form-check">
-                <button onclick="seleccionado()" type="button" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-              </div>
+          <div class="modal-footer">
+            <div class="form-check">
+              <button onclick="seleccionado(), feedbackModal()" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                aria-label="Close">Cerrar</button>
             </div>
           </div>
         </div>
       </div>
-
-      <h2>Forma de pago</h2>
-      <div class="col-sm-12">
-         <p id="noseleccionado">No ha seleccionado</p>
-        <button type="button" class="btn btn-link ps-0" data-bs-toggle="modal" data-bs-target="#modalPago" id="seleccionar">Seleccionar</button>
-          <div id="validationServer04Feedback" class="invalid-feedback">
-            Debes aceptar los terminos de servicio
-          </div>
-      </div>
-      <div class="d-grid gap-2">
-      <button class="btn btn-primary" type="submit" id="finalizar-compra">Finalizar compra</button>
-</div>
-</form>` 
+    </div>
+  </form>` 
 
       
 }
@@ -287,34 +337,7 @@ getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
     if (resultObj.status === "ok") {
         currentArticleArray = resultObj.data
         showCart();
-       /*  addToCart(); */
-
-        var forms = document.querySelectorAll('.needs-validation')
-
-       // Bucle sobre ellos y evitar el envío
-       Array.prototype.slice.call(forms)
-       .forEach(function (form) {
-       form.addEventListener('submit', function (event) {
-        if (!form.checkValidity()) {
-          event.preventDefault()
-          event.stopPropagation()
-          form.classList.add('was-validated')
-        } else {
-          event.preventDefault()
-          event.stopPropagation()
-          console.log("a");
-          alert("a");
-         /*  document.getElementById("cart-container").innerHTML += 
-          `<div class="alert alert-success" role="alert">
-          This is a success alert—check it out!
-        </div>` */
-        }
-      }) 
-    })
-        
-        /* document.getElementById("btnEnviar").addEventListener("submit", function () { //Botón enviar  
-          document.getElementById("formulariopago").className += " was-validated"
-        }); */
+        feedbackFormCarrito();  
   }
 
 });

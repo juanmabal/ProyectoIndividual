@@ -362,10 +362,10 @@ input#cant_articles {
   display: block;
 }
 
-#tarjeta, #bancaria {
+/* #tarjeta, #bancaria {
   margin-top: 20px;
   margin-bottom: 0px;
-}
+} */
 
 #formapago-modal {
   font-size: 25px;
@@ -373,4 +373,9 @@ input#cant_articles {
 
 #finalizar-compra {
   margin-top: 50px;
+}
+
+#pagoNoValido {
+  color: rgb(219, 0, 0);
+  display: none;
 }
