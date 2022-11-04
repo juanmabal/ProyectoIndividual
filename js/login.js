@@ -1,7 +1,8 @@
 localStorage.removeItem('usuario');
 
 function ingreso() {
-    location.replace("portada.html")
+    location.replace(localStorage.getItem("recent-page"));
+    
   }
 
 document.addEventListener("DOMContentLoaded", function () {

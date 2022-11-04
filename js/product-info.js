@@ -1,25 +1,47 @@
 let nump = 11; //Número de párrafo que siempre corresponderá a la fecha y que en cuyo final se agregarán estrellas
 let stars = undefined; //Estrellas "encendidas"
 let nostars = undefined; //Estrellas "apagadas"
+let productsList = [];
+
+/* FOR IN
+for (let i = 0; i < carrito.length; i++) {
+  articulo = carrito[i];
+  for (const property in articulo) {
+    console.log(`${property}: ${articulo[property]}`);
+  }
+} */
 
 
+function addToKart() {
+
+  if (listaNombres.includes(`${currentProductArray.name}`)) { //Si el carrito contiene al producto..
+    alert("Este producto ya se encuentra en su carrito");
+  } else {  //Si el carrito no lo contiene: Se agrega el producto al carrito
+    carrito.push({
+      "Id": `${currentProductArray.id}`,
+      "Imagen": `${currentProductArray.images[0]}`,
+      "Nombre": `${currentProductArray.name}`,
+      "Moneda": `${currentProductArray.currency}`,
+      "Costo": `${currentProductArray.cost}`,
+      "Subtotal": `subtotal`+`${currentProductArray.id}`,
+    });
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    window.location = "cart.html" 
+  }
+}
 
 function addToCart() { //AGREGAR AL CARRITO
 
   if (localStorage.getItem("carrito")) { //Si el carrito existe..
     carrito = JSON.parse(localStorage.getItem("carrito"));
-    carrito.push({
-    "Id": `${currentProductArray.id}`,
-    "Imagen": `${currentProductArray.images[0]}`,
-    "Nombre": `${currentProductArray.name}`,
-    "Moneda": `${currentProductArray.currency}`,
-    "Costo": `${currentProductArray.cost}`,
-    "Subtotal": `subtotal`+`${currentProductArray.id}`,
-  });
-  localStorage.setItem("carrito", JSON.stringify(carrito));
-   window.location = "cart.html" 
-
-  } else { //Si no existe
+    listaNombres = [];
+    for (let i = 0; i < carrito.length; i++) {
+      articulo = carrito[i];
+      listaNombres.push(articulo.Nombre)
+    }
+    console.log("a");
+    addToKart();
+  } else { //Si no existe: Crear carrito
     let carrito = [{
     "Id": `${currentProductArray.id}`,
     "Imagen": `${currentProductArray.images[0]}`,
@@ -28,8 +50,6 @@ function addToCart() { //AGREGAR AL CARRITO
     "Costo": `${currentProductArray.cost}`,
     "Subtotal": `subtotal`+`${currentProductArray.id}`,
     }];
-    let subtotal = carrito[0].Id + `subtotal`;
-
     localStorage.setItem("carrito", JSON.stringify(carrito));
     window.location = "cart.html" 
   }

@@ -16,22 +16,27 @@ function showFullCart() { //DESAFÍO
     <td scope="row"><img src="${articulo.Imagen}" alt=""></td>
     <td>${articulo.Nombre}</td>
     <td>${articulo.Moneda +` `+ articulo.Costo}</td>
-    <td><input type="number" oninput="article_Subtotal(${articulo.Costo + `,` + articulo.Id + `,` + articulo.Subtotal + `,` + articulo.Moneda})" id="${articulo.Id}" min="1"
+    <td><input type="number" oninput="article_Subtotal(${articulo.Costo + `,` + articulo.Id})" id="${articulo.Id}" min="1"
     onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
-    <td id="${articulo.Subtotal}">${articulo.Moneda + ` ` + articulo.Costo}</td>
+    <td id="we">${articulo.Moneda + ` ` + articulo.Costo}</td>
     </tr>`
   }
 }
 
-/* function article_Subtotal(costo, id, artSubtotal, moneda) {
+function article_Subtotal(costo, id) {
 
       unitCost = costo;
       cantArticles = document.getElementById(id).value;
       subtotal = unitCost * cantArticles;
-      currency = moneda;
 
-  document.getElementById(artSubtotal).innerHTML = `${currency} ` + subtotal;
-} */
+      document.getElementById(id).value = 5;
+      document.getElementById(id).addEventListener("click", function () {
+
+        
+      })
+
+  document.getElementById("we").innerHTML = `a`;
+}
 
 
 function enviopremium() {
@@ -95,7 +100,7 @@ function pagoTransferencia() {
   }
 }
 
-function seleccionado() {
+function pagoSeleccionado() {
   if (document.getElementById("tarjeta").checked) {
     document.getElementById("noseleccionado").innerHTML = `Tarjeta de crédito`;
   } else if (document.getElementById("bancaria").checked) {
@@ -110,7 +115,8 @@ function feedbackFormCarrito() {
     if (!formCarrito.checkValidity() || !modalForm.checkValidity()) {
       event.preventDefault()
       event.stopPropagation()
-      formCarrito.classList.add('was-validated')
+      formCarrito.classList.add('was-validated');
+      modalForm.classList.add('was-validated');
       feedbackModal();
     } else {
       event.preventDefault()
@@ -141,7 +147,7 @@ function showCart() {
     document.getElementById("cart-container").innerHTML += 
     ` <form id="formCarrito" class="row g-3 needs-validation" id="formulariopago" novalidate>
     <h1>Carrito de compras</h1>
-    <h2>Artículos a comprar</h2>
+    <h2 class="titulosCarrito">Artículos a comprar</h2>
     <div class="table-responsive">
       <table class="table" id="carrito">
         <thead>
@@ -167,7 +173,7 @@ function showCart() {
       </table>
     </div>
     
-    <h2>Tipo de envío</h2>
+    <h2 class="titulosCarrito">Tipo de envío</h2>
     <div>
     <div class="form-check">
       <input oninput="enviopremium()" id="premium" type="radio" class="form-check-input" name="tipoEnvio" required>
@@ -184,7 +190,7 @@ function showCart() {
     </div>  
     </div>
   
-    <h2>Dirección de envío</h2>
+    <h2 class="titulosCarrito">Dirección de envío</h2>
     <div class="col-md-4">
       <label for="calle" class="form-label">Calle</label>
       <input type="text" class="form-control" id="calle" required>
@@ -220,7 +226,7 @@ function showCart() {
   
     <hr>
   
-    <h2>Costos</h2>
+    <h2 class="titulosCarrito">Costos</h2>
     <div>
     <div class="subtotales">
       <p>Subtotal</p>
@@ -241,7 +247,7 @@ function showCart() {
   
           <hr id="separador">
   
-          <h2>Forma de pago</h2>
+          <h2 class="titulosCarrito">Forma de pago</h2>
 
           <div>
             <p id="noseleccionado">No ha seleccionado</p>
@@ -319,7 +325,7 @@ function showCart() {
           </div>
           <div class="modal-footer">
             <div class="form-check">
-              <button onclick="seleccionado(), feedbackModal()" type="button" class="btn btn-primary" data-bs-dismiss="modal"
+              <button onclick="pagoSeleccionado(), feedbackModal()" type="button" class="btn btn-primary" data-bs-dismiss="modal"
                 aria-label="Close">Cerrar</button>
             </div>
           </div>
@@ -337,6 +343,7 @@ getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
     if (resultObj.status === "ok") {
         currentArticleArray = resultObj.data
         showCart();
+        showFullCart();
         feedbackFormCarrito();  
   }
 
