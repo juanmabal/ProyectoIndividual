@@ -5,6 +5,8 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
+
+  <script src="js/check-user-existence.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
@@ -45,16 +47,95 @@
             <a class="nav-link" href="sell.html">Vender</a>
           </li>
           <li class="nav-item">
+            <div class="dropdown">
+              <a class="btn btn-secondary dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" id="nomusuario" aria-expanded="false">
+                Usuario
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <li><a class="dropdown-item" href="cart.html">Mi carrito</a></li>
+                <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+                <li><a class="dropdown-item" href="index.html">Cerrar sesión</a></li>
+              </ul>
+            </div>
           </li>
         </ul>
       </div>
     </div>
   </nav>
   <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+    <div class="container" id="profile-container">
+      <h2 id="perfil">Perfil</h2>
+      <img src="img/img-defecto.jpg" id="img-perfil" alt="Imagen de perfil">
+      <hr>
+     <!--  <input type="file" onchange="previewFile()"> -->
+
+      <form class="row g-3 needs-validation" id="profile-form"novalidate>
+    
+        <div class="col-md-5">
+        <label for="primer-nombre" class="form-label">Primer nombre *</label>
+        <input type="text" class="form-control" id="primer-nombre" value="" required>
+        <div class="valid-feedback">
+        ¡Se ve bien!
       </div>
+      <div class="invalid-feedback">
+        Ingresa un nombre válido
+      </div>
+      </div>
+    
+      <div class="col-md-5">
+        <label for="segundo-nombre" class="form-label">Segundo nombre</label>
+        <input type="text" class="form-control" id="segundo-nombre">
+      </div>
+    
+      <div class="col-md-5">
+        <label for="primer-apellido" class="form-label">Primer apellido *</label>
+        <input type="text" class="form-control" id="primer-apellido" value="" required>
+        <div class="valid-feedback">
+        ¡Se ve bien!
+      </div>
+      <div class="invalid-feedback">
+        Ingresa un apellido válido
+      </div>
+      </div>
+    
+      <div class="col-md-5">
+      <label for="segundo-apellido" class="form-label">Segundo apellido</label>
+      <input type="text" class="form-control" id="segundo-apellido">
+    </div>
+    
+    <div class="col-md-5">
+    <label for="email" class="form-label">E-mail *</label>
+    <input type="email" class="form-control" id="email" value="" required>
+    <div class="valid-feedback">
+    ¡Se ve bien!
+    </div>
+    <div class="invalid-feedback">
+    Ingresa un e-mail válido
+    </div>
+    </div>
+
+    <div class="col-md-5">
+      <label for="" class="form-label">Imagen de perfil</label>
+      <input type="file" onchange="previewFile()">
+      </div>
+    
+    
+    <div class="col-md-5">
+    <label for="telefono" class="form-label">Teléfono de contacto</label>
+    <input type="number" class="form-control" id="telefono">
+    </div>
+    
+    <hr>
+    
+    <div class>
+    <button class="btn btn-primary" type="submit" id="finalizar-compra">Guardar cambios</button>
+    </div>
+    
+    
+    
+      </form>
+
+      <div id="success"></div>
     </div>
   </main>
   <footer class="text-muted">

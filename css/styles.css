@@ -374,3 +374,16 @@ input#cant_articles {
   color: rgb(219, 0, 0);
   display: none;
 }
+
+/* PERFIL */
+
+#img-perfil {
+  display: inline-block;
+  height: 75px;
+  width: 70px;
+  margin-left: 80%;
+}
+
+h2#perfil {
+  display: inline;
+}

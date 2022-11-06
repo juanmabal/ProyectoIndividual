@@ -6,13 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
   
-  <script>
-    if (!localStorage.getItem("usuario")) {
-      localStorage.setItem("recent-page", window.location);
-      window.location = "index.html" ;
-    }
-  </script>
-
+  <script src="js/check-user-existence.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/font-awesome.min.css" rel="stylesheet">

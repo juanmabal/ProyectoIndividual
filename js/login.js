@@ -1,7 +1,12 @@
 localStorage.removeItem('usuario');
+localStorage.removeItem('usuariodata');
 
 function ingreso() {
-    location.replace(localStorage.getItem("recent-page"));
+    if (localStorage.getItem("recent-page")) {
+        location.replace(localStorage.getItem("recent-page"));
+    } else {
+        location.replace("portada.html");
+    }
     
   }
 

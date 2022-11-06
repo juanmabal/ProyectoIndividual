@@ -16,26 +16,43 @@ function showFullCart() { //DESAFÍO
     <td scope="row"><img src="${articulo.Imagen}" alt=""></td>
     <td>${articulo.Nombre}</td>
     <td>${articulo.Moneda +` `+ articulo.Costo}</td>
-    <td><input type="number" oninput="article_Subtotal(${articulo.Costo + `,` + articulo.Id})" id="${articulo.Id}" min="1"
+    <td><input type="number" id="${articulo.Id}" data-id="${articulo.Id}" min="1"
     onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
-    <td id="we">${articulo.Moneda + ` ` + articulo.Costo}</td>
+    <td id="${articulo.Subtotal}">${articulo.Moneda + ` ` + articulo.Costo + ` - ` + articulo.Subtotal}</td>
     </tr>`
   }
 }
 
-function article_Subtotal(costo, id) {
+/*  let pruebaidsubtotal = document.getElementById("subtotal50922").innerHTML;
+ console.log(pruebaidsubtotal);  */
+
+/* function article_Subtotal(costo, id, money, idsubtotal) {
+
+   document.getElementById(idsubtotal).innerHTML += "a";
+  console.log(idsubtotal);
+  
+  carrito = JSON.parse(localStorage.getItem("carrito"));
+  console.log(carrito);
+  let found = carrito.find(element => element.id = id);
+  console.log(found);
+  console.log(id);
 
       unitCost = costo;
       cantArticles = document.getElementById(id).value;
       subtotal = unitCost * cantArticles;
+      document.getElementById(idsubtotal).innerHTML = subtotal + ` ` + money;
+      console.log(idsubtotal);
 
-      document.getElementById(id).value = 5;
-      document.getElementById(id).addEventListener("click", function () {
+ document.getElementById(idsubtotal).innerHTML = `${money}` + subtotal; 
+} */
 
-        
-      })
-
-  document.getElementById("we").innerHTML = `a`;
+function article_Subtotal(event) {
+ /*  let atributo = document.getElementById(id).value;
+  console.log(atributo); */
+console.log(event.target);
+/* let artid = event.target.id;
+let subtotalarc = document.getElementById(artid).value;
+console.log(subtotalarc); */
 }
 
 
@@ -145,7 +162,7 @@ function successMessage() {
 function showCart() {
     
     document.getElementById("cart-container").innerHTML += 
-    ` <form id="formCarrito" class="row g-3 needs-validation" id="formulariopago" novalidate>
+    ` <form id="formCarrito" class="row g-3 needs-validation" novalidate>
     <h1>Carrito de compras</h1>
     <h2 class="titulosCarrito">Artículos a comprar</h2>
     <div class="table-responsive">
@@ -333,8 +350,6 @@ function showCart() {
       </div>
     </div>
   </form>` 
-
-      
 }
 
 document.addEventListener("DOMContentLoaded", function (e) {
@@ -346,6 +361,12 @@ getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
         showFullCart();
         feedbackFormCarrito();  
   }
+
+});
+
+document.getElementById("cart-container").addEventListener("click", (e) => {
+
+article_Subtotal(e.target.dataset.Id);
 
 });
 
