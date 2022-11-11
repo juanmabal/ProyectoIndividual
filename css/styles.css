@@ -228,6 +228,18 @@ a.custom-card:hover {
   margin: 0px auto;
 }
 
+/* products */
+#search-product {
+  display: inline;
+}
+
+#search-product-input {
+  display: inline;
+  width: 200px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
 /*products-info*/
 #product-name { /*Nombre del producto*/
 
@@ -386,4 +398,14 @@ input#cant_articles {
 
 h2#perfil {
   display: inline;
+}
+
+.eliminar-articulo{
+  color: #f70000;
+  border: 1px solid #f70000;
+  
+}
+
+.eliminar-articulo:hover {
+  background-color: #f3f3f3;
 }

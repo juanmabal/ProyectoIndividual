@@ -90,7 +90,9 @@ function showProductsList(){
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
 
-            htmlContentToAppend += `
+                if (search == undefined || search == "" || product.name.toLowerCase().includes(search.toLowerCase())) {
+
+                    htmlContentToAppend += `
             <div onclick="setProdID(${product.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
@@ -106,6 +108,25 @@ function showProductsList(){
                 </div>
             </div>
             `
+
+                }
+
+            /* htmlContentToAppend += `
+            <div onclick="setProdID(${product.id})" class="list-group-item list-group-item-action cursor-active">
+                <div class="row">
+                    <div class="col-3">
+                        <img src="${product.image}" alt="${product.description}" class="img-thumbnail">
+                    </div>
+                    <div class="col">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">${product.name + ' - USD ' + product.cost}</h4>
+                            <small class="text-muted">${product.soldCount} vendidos</small>
+                        </div>
+                        <p class="mb-1">${product.description}</p>
+                    </div>
+                </div>
+            </div>
+            ` */
         }
 
         document.getElementById("cat-list-container").innerHTML = htmlContentToAppend;
@@ -189,5 +210,10 @@ document.addEventListener("DOMContentLoaded", function(e){
 
         showProductsList();
     });
+
+    document.getElementById("search-product-input").addEventListener("input", function() {
+        search = document.getElementById("search-product-input").value;
+        showProductsList();
+    })
 
 });

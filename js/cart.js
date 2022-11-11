@@ -19,6 +19,7 @@ function showFullCart() { //DESAFÍO
     <td><input type="number" id="${articulo.Id}" data-id="${articulo.Id}" min="1"
     onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
     <td id="${articulo.Subtotal}">${articulo.Moneda + ` ` + articulo.Costo + ` - ` + articulo.Subtotal}</td>
+    <td><button class="btn eliminar-articulo"><i class="fa fa-trash"></i></button></td>
     </tr>`
   }
 }
@@ -128,6 +129,7 @@ function pagoSeleccionado() {
 function feedbackFormCarrito() {
   let modalForm = document.getElementById("modalForm");
   let formCarrito = document.getElementById("formCarrito")
+  let finalizar_compra = document.getElementById("finalizar-compra");
   formCarrito.addEventListener('submit', function (event) {
     if (!formCarrito.checkValidity() || !modalForm.checkValidity()) {
       event.preventDefault()
@@ -369,5 +371,7 @@ document.getElementById("cart-container").addEventListener("click", (e) => {
 article_Subtotal(e.target.dataset.Id);
 
 });
+
+/* document.getElementsByClassName("") */
 
 });
