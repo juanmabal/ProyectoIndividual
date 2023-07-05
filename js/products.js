@@ -90,7 +90,7 @@ function showProductsList(){
         if (((minCount == undefined) || (minCount != undefined && parseInt(product.cost) >= minCount)) &&
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
 
-                if (search == undefined || search == "" || product.name.toLowerCase().includes(search.toLowerCase())) {
+                if (search == undefined || search == "" || product.name.toLowerCase().includes(search.toLowerCase()) || product.description.toLowerCase().includes(search.toLowerCase()) ) {
 
                     htmlContentToAppend += `
             <div onclick="setProdID(${product.id})" class="list-group-item list-group-item-action cursor-active">
@@ -150,6 +150,8 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //Función que se ejecuta una vez que se haya lanzado el evento de
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
+
+/* ${CatID}${EXT_TYPE} */
 document.addEventListener("DOMContentLoaded", function(e){
     getJSONData(`${PRODUCTS_URL}${CatID}${EXT_TYPE}`).then(function(resultObj){
         if (resultObj.status === "ok"){
@@ -214,6 +216,7 @@ document.addEventListener("DOMContentLoaded", function(e){
     document.getElementById("search-product-input").addEventListener("input", function() {
         search = document.getElementById("search-product-input").value;
         showProductsList();
+        
     })
 
 });

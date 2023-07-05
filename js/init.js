@@ -6,7 +6,20 @@ const PRODUCT_INFO_COMMENTS_URL = "https://japceibal.github.io/emercado-api/prod
 const CART_INFO_URL = "https://japceibal.github.io/emercado-api/user_cart/";
 const CART_BUY_URL = "https://japceibal.github.io/emercado-api/cart/buy.json";
 const EXT_TYPE = ".json";
-const CAT_CIENTOUNO = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+
+
+/* //URLS PARA LOCALHOST
+const CATEGORIES_URL = "http://localhost:3000/cat";
+const PUBLISH_PRODUCT_URL = "https://japceibal.github.io/emercado-api/sell/publish.json";
+const PRODUCTS_URL = "http://localhost:3000/cats_products/";
+const PRODUCT_INFO_URL = "http://localhost:3000/products/";
+const PRODUCT_INFO_COMMENTS_URL = "http://localhost:3000/products_comments/";
+const CART_INFO_URL = "http://localhost:3000/user_cart/";
+const CART_BUY_URL = "http://localhost:3000/cart";
+const EXT_TYPE = ".json"; */
+
+
+
 
 let CatID = localStorage.getItem('catID'); // Obtengo valor de CatID almacenado en localStorage para luego pasarlo y concatenarlo en getJSONData
 let prodID = localStorage.getItem('prodID');

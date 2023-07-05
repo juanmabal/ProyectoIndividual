@@ -2,19 +2,11 @@ let nump = 11; //Número de párrafo que siempre corresponderá a la fecha y que
 let stars = undefined; //Estrellas "encendidas"
 let nostars = undefined; //Estrellas "apagadas"
 let productsList = [];
-
-/* FOR IN
-for (let i = 0; i < carrito.length; i++) {
-  articulo = carrito[i];
-  for (const property in articulo) {
-    console.log(`${property}: ${articulo[property]}`);
-  }
-} */
-
+let cart = document.getElementById("container");
 
 function addToKart() {
 
-  if (listaNombres.includes(`${currentProductArray.name}`)) { //Si el carrito contiene al producto..
+  if (listaCarrito.includes(`${currentProductArray.name}`)) { //Si el carrito contiene al producto..
     alert("Este producto ya se encuentra en su carrito");
   } else {  //Si el carrito no lo contiene: Se agrega el producto al carrito
     carrito.push({
@@ -34,10 +26,10 @@ function addToCart() { //AGREGAR AL CARRITO
 
   if (localStorage.getItem("carrito")) { //Si el carrito existe..
     carrito = JSON.parse(localStorage.getItem("carrito"));
-    listaNombres = [];
+    listaCarrito = [];
     for (let i = 0; i < carrito.length; i++) {
       articulo = carrito[i];
-      listaNombres.push(articulo.Nombre)
+      listaCarrito.push(articulo.Nombre)
     }
     console.log("a");
     addToKart();
@@ -71,10 +63,9 @@ function addStars() {
     }
 }
 
-
 function showInfoList() { //Información principal: Precio - Descripción - Categoría - Vendidos
 
-    document.getElementById("container").innerHTML =
+    cart.innerHTML =
         `<h3 id="product-name">${currentProductArray.name}</h3>
         <button onclick="addToCart()" type="button" class="btn btn-success my-3" id="addToCart">Agregar al carrito</button>
      <hr>
@@ -88,9 +79,9 @@ function showInfoList() { //Información principal: Precio - Descripción - Cate
       <p>${currentProductArray.soldCount}</p>
       <p class="attributes">Imágenes ilustrativas</p>
       `
-
+      
       //DESAFÍO - Entrega 4
-      document.getElementById("container").innerHTML += 
+      cart.innerHTML += 
       `<div id="carouselExampleIndicators" class="carousel slide w-50" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -126,12 +117,12 @@ function showInfoList() { //Información principal: Precio - Descripción - Cate
 
 function showCommentsList() { //Lista de comentarios
 
-    document.getElementById("container").innerHTML += `<p class="commentaries-title">Comentarios</p>`;
+    cart.innerHTML += `<p class="commentaries-title">Comentarios</p>`;
     
     for (let i = 0; i < currentProductCommentsArray.length; i++) {
         let currentcomment = currentProductCommentsArray[i];
         
-        document.getElementById("container").innerHTML += `
+        cart.innerHTML += `
         <div class="comment_container">
         <p>${currentcomment.user}</p>
         <p>${currentcomment.dateTime} - </p>
@@ -198,21 +189,21 @@ document.addEventListener("DOMContentLoaded", function (e) {
     
             let fecha = `${anio + '-' + mes + '-' + dia + ' ' + hora + ':' + minutos + ':' + segundos}` //Fecha y hora
             let user = localStorage.getItem('usuario'); //Usuario
-            let comentario = document.getElementById("comentario").value; //Comentario
+            let comentario = document.getElementById("comentario"); //Comentario
     
-            document.getElementById("container").innerHTML +=
+            cart.innerHTML +=
                 `<div class="comment_container">
             <p>${user}</p>
             <p>${fecha} - </p>
-            <p>${comentario}</p>
+            <p>${comentario.value}</p>
             </div>`;
     
              stars = parseInt(document.getElementById("puntuacion").value); //Puntuación y Estrellas "Encendidas"
              nostars = 5 - stars; //Estrellas "apagadas"
              addStars(); 
 
-            document.getElementById("comentario").value = ""; //Vacía comentario
-            document.getElementById("comentario").disabled = true; //Inhabilita comentario
+            comentario.value = ""; //Vacía comentario
+            comentario.disabled = true; //Inhabilita comentario
             document.getElementById("puntuacion").disabled = true; //Inhabilita puntuación
             document.getElementById("btnEnviar").disabled = true; //Inhabilita botón
         

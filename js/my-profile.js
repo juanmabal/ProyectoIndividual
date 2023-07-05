@@ -2,12 +2,11 @@ let usuariodata = JSON.parse(localStorage.getItem("usuariodata"));
 
 function successMessage() {
   document.getElementById("success").innerHTML += 
-  `<div class="alert alert-success" role="alert"> Cambios guardados
+  `<div class="alert alert-success" role="alert"> Cambios guardados correctamente
 </div>`
 }
 
-function checkUser() {
-  if (localStorage.getItem("usuario")) {
+function showUserData() {
     document.getElementById("email").value = `${localStorage.getItem("usuario")}`;
     if (localStorage.getItem("usuariodata")) {
       document.getElementById("primer-nombre").value = `${usuariodata.nombre}`
@@ -17,7 +16,6 @@ function checkUser() {
       document.getElementById("telefono").value = `${usuariodata.telefono}`
       document.getElementById("img-perfil").src = `${usuariodata.imgperfil}`;
     }
-  }
 }
 
 function previewFile() {
@@ -63,5 +61,5 @@ function feedbackForm() {
     })
   }
 
-checkUser()
+showUserData()
 feedbackForm()

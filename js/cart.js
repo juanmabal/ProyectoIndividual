@@ -6,7 +6,7 @@ let subtotalpremium = undefined;
 let subtotalexpress = undefined;
 let subtotalstandard = undefined;
 
-function showFullCart() { //DESAFÍO
+function showFullCart() { //Parte del DESAFÍO 5 y muy pequeña parte del DESAFÍO 6
   localStorage.getItem("carrito");
   carrito = JSON.parse(localStorage.getItem("carrito"));
   for(let i = 0; i < carrito.length; i++) {
@@ -18,42 +18,10 @@ function showFullCart() { //DESAFÍO
     <td>${articulo.Moneda +` `+ articulo.Costo}</td>
     <td><input type="number" id="${articulo.Id}" data-id="${articulo.Id}" min="1"
     onkeypress="return (event.charCode >= 48 && event.charCode <= 57)"></td>
-    <td id="${articulo.Subtotal}">${articulo.Moneda + ` ` + articulo.Costo + ` - ` + articulo.Subtotal}</td>
+    <td id="${articulo.Subtotal}">${articulo.Moneda + ` ` + articulo.Costo}</td>
     <td><button class="btn eliminar-articulo"><i class="fa fa-trash"></i></button></td>
     </tr>`
   }
-}
-
-/*  let pruebaidsubtotal = document.getElementById("subtotal50922").innerHTML;
- console.log(pruebaidsubtotal);  */
-
-/* function article_Subtotal(costo, id, money, idsubtotal) {
-
-   document.getElementById(idsubtotal).innerHTML += "a";
-  console.log(idsubtotal);
-  
-  carrito = JSON.parse(localStorage.getItem("carrito"));
-  console.log(carrito);
-  let found = carrito.find(element => element.id = id);
-  console.log(found);
-  console.log(id);
-
-      unitCost = costo;
-      cantArticles = document.getElementById(id).value;
-      subtotal = unitCost * cantArticles;
-      document.getElementById(idsubtotal).innerHTML = subtotal + ` ` + money;
-      console.log(idsubtotal);
-
- document.getElementById(idsubtotal).innerHTML = `${money}` + subtotal; 
-} */
-
-function article_Subtotal(event) {
- /*  let atributo = document.getElementById(id).value;
-  console.log(atributo); */
-console.log(event.target);
-/* let artid = event.target.id;
-let subtotalarc = document.getElementById(artid).value;
-console.log(subtotalarc); */
 }
 
 
@@ -126,7 +94,7 @@ function pagoSeleccionado() {
   }
 }
 
-function feedbackFormCarrito() {
+function feedbackFormCart() {
   let modalForm = document.getElementById("modalForm");
   let formCarrito = document.getElementById("formCarrito")
   let finalizar_compra = document.getElementById("finalizar-compra");
@@ -156,6 +124,19 @@ function feedbackModal() {
  }
 
 function successMessage() {
+  getJSONData(`${CART_BUY_URL}`).then(function (resultObj) {
+    if (resultObj.status === "ok") {
+       cart_buy_message = resultObj.data;
+       console.log(cart_buy_message.msg);
+       document.getElementById("success").innerHTML += 
+       `<div class="alert alert-success" role="alert"> ${cart_buy_message.msg};
+     </div>`
+
+  }
+
+});
+
+
   document.getElementById("success").innerHTML += 
   `<div class="alert alert-success" role="alert"> ¡Has comprado con exito!
 </div>`
@@ -361,17 +342,8 @@ getJSONData(`${CART_INFO_URL}25801${EXT_TYPE}`).then(function (resultObj) {
         currentArticleArray = resultObj.data
         showCart();
         showFullCart();
-        feedbackFormCarrito();  
+        feedbackFormCart();  
   }
 
 });
-
-document.getElementById("cart-container").addEventListener("click", (e) => {
-
-article_Subtotal(e.target.dataset.Id);
-
-});
-
-/* document.getElementsByClassName("") */
-
 });
