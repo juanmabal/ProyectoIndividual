@@ -238,6 +238,17 @@ a.custom-card:hover {
   text-align: center;
 }
 
+/* portada */
+#portada {
+  width: 100%;
+  height: auto;
+}
+
+#portada-subtitulo {
+  color: grey;
+  margin-bottom: 50px;
+}
+
 /* products */
 #search-product {
   display: inline;
