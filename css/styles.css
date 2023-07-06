@@ -249,6 +249,12 @@ a.custom-card:hover {
   margin-bottom: 50px;
 }
 
+/* categories */
+.category-img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* products */
 #search-product {
   display: inline;
@@ -437,5 +443,10 @@ h2#perfil {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
+  }
+  .category-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
   }
 }
